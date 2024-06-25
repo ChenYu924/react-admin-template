@@ -1,0 +1,92 @@
+// 布局页: 盒子的间距、背景色和圆角等(全局变量)
+$layout-box-space-sm: 16px;
+$layout-box-space-md: 32px;
+$layout-box-bgc: #fff;
+$box-radius: 8px;
+
+@mixin sticky-fragment {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 全局滚动条 */
+// 全局滚动条样式
+::-webkit-scrollbar {
+  width: $box-radius;
+  height: $box-radius;
+}
+
+// 滚动条轨道
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+// 滚动条滑块
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+}
+
+// 滚动条滑块：鼠标悬停
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* 首页布局页PrimaryLayout.jsx相关 */
+// 首页布局页样式
+.primary-layout {
+  min-width: 1000px;
+
+  .sider {
+    @include sticky-fragment;
+    height: 100vh;
+
+    .logo-wrapper {
+      height: 64px;
+      padding: $layout-box-space-sm;
+
+      .logo {
+        height: 100%;
+        background-color: #334454;
+        border-radius: $box-radius;
+      }
+    }
+  }
+
+  .main {
+    min-height: 100vh;
+
+    .header {
+      @include sticky-fragment;
+      background-color: $layout-box-bgc;
+      padding: 0 $layout-box-space-sm;
+      display: flex;
+      align-items: center;
+
+      .collapsed-button {
+        font-size: 18px;
+        width: $layout-box-space-md;
+        height: $layout-box-space-md;
+      }
+    }
+
+    .content {
+      margin: $layout-box-space-sm;
+      min-height: calc(100vh - 64px - $layout-box-space-sm * 2);
+      padding: $layout-box-space-sm;
+      background-color: $layout-box-bgc;
+      border-radius: $box-radius;
+
+      .back-top-position {
+        right: $layout-box-space-md;
+        bottom: $layout-box-space-md;
+      }
+    }
+  }
+}
