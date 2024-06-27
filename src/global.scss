@@ -3,11 +3,25 @@ $layout-box-space-sm: 16px;
 $layout-box-space-md: 32px;
 $layout-box-bgc: #fff;
 $box-radius: 8px;
+$icon-opacity-num: 0.7;
 
 @mixin sticky-fragment {
   position: sticky;
   top: 0;
   z-index: 1;
+}
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@mixin flex-row-x-center {
+  display: flex;
+  justify-content: center;
+}
+@mixin flex-row-y-center {
+  display: flex;
+  align-items: center;
 }
 
 * {
@@ -22,17 +36,14 @@ $box-radius: 8px;
   width: $box-radius;
   height: $box-radius;
 }
-
 // 滚动条轨道
 ::-webkit-scrollbar-track {
   background: #f1f1f1;
 }
-
 // 滚动条滑块
 ::-webkit-scrollbar-thumb {
   background: #c1c1c1;
 }
-
 // 滚动条滑块：鼠标悬停
 ::-webkit-scrollbar-thumb:hover {
   background: #a8a8a8;
@@ -46,6 +57,7 @@ $box-radius: 8px;
   .sider {
     @include sticky-fragment;
     height: 100vh;
+    overflow: auto;
 
     .logo-wrapper {
       height: 64px;
@@ -55,6 +67,7 @@ $box-radius: 8px;
         height: 100%;
         background-color: #334454;
         border-radius: $box-radius;
+        cursor: pointer;
       }
     }
   }
@@ -66,22 +79,105 @@ $box-radius: 8px;
       @include sticky-fragment;
       background-color: $layout-box-bgc;
       padding: 0 $layout-box-space-sm;
-      display: flex;
-      align-items: center;
+      margin-bottom: $layout-box-space-sm;
 
-      .collapsed-button {
-        font-size: 18px;
-        width: $layout-box-space-md;
-        height: $layout-box-space-md;
+      .wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .left {
+          @include flex-row-y-center;
+
+          .collapsed-button {
+            font-size: 18px;
+            width: $layout-box-space-md;
+            height: $layout-box-space-md;
+          }
+        }
+
+        .right {
+          @include flex-row-y-center;
+
+          .header-icon {
+            cursor: pointer;
+            font-size: 18px;
+            margin-left: $layout-box-space-sm;
+
+            &:hover {
+              opacity: $icon-opacity-num;
+            }
+          }
+
+          .setting-item {
+            @include flex-row-y-center;
+          }
+
+          .avatar-wrapper {
+            @include flex-row-y-center;
+            margin-left: $layout-box-space-md;
+            cursor: pointer;
+
+            .user-name {
+            }
+
+            .arrow {
+              margin: 0 8px;
+              transition: transform 0.5s;
+            }
+
+            .avatar {
+              background-color: #f56a00;
+              color: #fff;
+            }
+
+            // 鼠标移入时arrow旋转180度，移出时恢复，且过渡时间都是0.5s
+            &:hover .arrow {
+              transform: rotate(180deg);
+            }
+          }
+        }
+      }
+    }
+
+    .tabs-bar {
+      @include flex-row-y-center;
+      padding: 0 $layout-box-space-sm;
+      margin-left: -1px;
+
+      .ant-tabs-tab {
+        border-radius: $box-radius $box-radius 0 0 !important;
+      }
+
+      .ant-tabs-nav {
+        margin-bottom: 0;
+      }
+
+      .left {
+        width: 98%;
+      }
+
+      .right {
+        width: 2%;
+        @include flex-center;
+
+        .clear {
+          cursor: pointer;
+
+          &:hover {
+            opacity: $icon-opacity-num;
+          }
+        }
       }
     }
 
     .content {
-      margin: $layout-box-space-sm;
-      min-height: calc(100vh - 64px - $layout-box-space-sm * 2);
+      margin: 0 $layout-box-space-sm $layout-box-space-sm $layout-box-space-sm;
       padding: $layout-box-space-sm;
       background-color: $layout-box-bgc;
-      border-radius: $box-radius;
+      border-top-right-radius: $box-radius;
+      border-bottom-left-radius: $box-radius;
+      border-bottom-right-radius: $box-radius;
 
       .back-top-position {
         right: $layout-box-space-md;
@@ -89,4 +185,22 @@ $box-radius: 8px;
       }
     }
   }
+}
+
+/* 通用局部样式 */
+// 下边框阴影
+.bottom-shadow {
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1);
+}
+// 左上边框圆角
+.left-top-radius {
+  border-top-left-radius: $box-radius;
+}
+// content高度(带有tabs-bar的content)
+.content-with-tabs-height {
+  min-height: calc(100vh - 100px - $layout-box-space-sm * 2);
+}
+// content高度(不带tabs-bar的content)
+.content-without-tabs-height {
+  min-height: calc(100vh - 64px - $layout-box-space-sm * 2);
 }
