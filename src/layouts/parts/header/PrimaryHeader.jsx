@@ -1,4 +1,12 @@
-import { Button, Avatar, Badge, Dropdown, Popover, Switch } from "antd";
+import {
+  Button,
+  Avatar,
+  Badge,
+  Dropdown,
+  Popover,
+  Switch,
+  Divider,
+} from "antd";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -6,10 +14,18 @@ import {
   UserOutlined,
   BellOutlined,
   SettingOutlined,
+  RedoOutlined,
 } from "@ant-design/icons";
 
 function PrimaryHeader(props) {
-  const { collapsed, setCollapsed, tabsBarShow, setTabsBarShow } = props;
+  const {
+    collapsed,
+    setCollapsed,
+    tabsBarShow,
+    setTabsBarShow,
+    zenModeOpen,
+    setZenModeOpen,
+  } = props;
   const dropdownItems = [
     {
       key: "profile",
@@ -26,16 +42,33 @@ function PrimaryHeader(props) {
     alignItems: "center",
   };
   const settingItemLabelStyle = {
-    width: "48px",
+    width: "80px",
   };
   const popoverContent = (
-    <div style={settingItemStyle}>
-      <div style={settingItemLabelStyle}>页签：</div>
-      <Switch
-        checked={tabsBarShow}
-        onChange={() => setTabsBarShow(!tabsBarShow)}
-      />
-    </div>
+    <>
+      {/* 页签开关 */}
+      <div style={settingItemStyle}>
+        <div style={settingItemLabelStyle}>页签：</div>
+        <Switch
+          checked={tabsBarShow}
+          onChange={() => setTabsBarShow(!tabsBarShow)}
+        />
+      </div>
+      <div style={{ height: "8px" }} />
+      {/* 禅模式开关 */}
+      <div style={settingItemStyle}>
+        <div style={settingItemLabelStyle}>禅模式：</div>
+        <Switch
+          checked={zenModeOpen}
+          onChange={() => setZenModeOpen(!zenModeOpen)}
+        />
+      </div>
+      <Divider style={{ margin: "8px 0" }} />
+      <div style={{ textAlign: "end", cursor: "pointer" }}>
+        <span>恢复默认</span>
+        <RedoOutlined />
+      </div>
+    </>
   );
 
   function handleNavProfile() {
@@ -44,7 +77,6 @@ function PrimaryHeader(props) {
   function handleNavLogin() {
     console.log("nav to login");
   }
-  function handleSetting() {}
 
   return (
     <div className="wrapper">
@@ -63,7 +95,7 @@ function PrimaryHeader(props) {
         </Badge>
         {/* 设置 */}
         <Popover content={popoverContent} title="设置" trigger="click">
-          <SettingOutlined className="header-icon" onClick={handleSetting} />
+          <SettingOutlined className="header-icon" />
         </Popover>
         {/* 个人信息 */}
         <Dropdown menu={{ items: dropdownItems }}>

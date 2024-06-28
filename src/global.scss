@@ -79,7 +79,6 @@ $icon-opacity-num: 0.7;
       @include sticky-fragment;
       background-color: $layout-box-bgc;
       padding: 0 $layout-box-space-sm;
-      margin-bottom: $layout-box-space-sm;
 
       .wrapper {
         display: flex;
@@ -102,7 +101,7 @@ $icon-opacity-num: 0.7;
           .header-icon {
             cursor: pointer;
             font-size: 18px;
-            margin-left: $layout-box-space-sm;
+            margin-left: 20px;
 
             &:hover {
               opacity: $icon-opacity-num;
@@ -144,6 +143,7 @@ $icon-opacity-num: 0.7;
       @include flex-row-y-center;
       padding: 0 $layout-box-space-sm;
       margin-left: -1px;
+      margin-top: $layout-box-space-sm;
 
       .ant-tabs-tab {
         border-radius: $box-radius $box-radius 0 0 !important;
@@ -172,7 +172,9 @@ $icon-opacity-num: 0.7;
     }
 
     .content {
-      margin: 0 $layout-box-space-sm $layout-box-space-sm $layout-box-space-sm;
+      margin-left: $layout-box-space-sm;
+      margin-right: $layout-box-space-sm;
+      margin-bottom: $layout-box-space-sm;
       padding: $layout-box-space-sm;
       background-color: $layout-box-bgc;
       border-top-right-radius: $box-radius;
@@ -203,4 +205,8 @@ $icon-opacity-num: 0.7;
 // content高度(不带tabs-bar的content)
 .content-without-tabs-height {
   min-height: calc(100vh - 64px - $layout-box-space-sm * 2);
+}
+// content上边距(不带tabs-bar的content)
+.content-without-tabs-mt {
+  margin-top: $layout-box-space-sm;
 }
