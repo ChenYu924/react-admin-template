@@ -25,7 +25,7 @@ function PrimaryLayout() {
     });
   }
   // 重置设置选项
-  function resetSettingOptions() {
+  function handleResetSettingOptions() {
     setTabsBarShow(true);
     setZenModeOpen(false);
   }
@@ -53,6 +53,7 @@ function PrimaryLayout() {
               setCollapsed={setCollapsed}
               setTabsBarShow={setTabsBarShow}
               setZenModeOpen={setZenModeOpen}
+              onResetSettingOptions={handleResetSettingOptions}
             />
           </Header>
         )}

@@ -1,12 +1,4 @@
-import {
-  Button,
-  Avatar,
-  Badge,
-  Dropdown,
-  Popover,
-  Switch,
-  Divider,
-} from "antd";
+import { Button, Avatar, Badge, Dropdown, Popover } from "antd";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -14,17 +6,18 @@ import {
   UserOutlined,
   BellOutlined,
   SettingOutlined,
-  RedoOutlined,
 } from "@ant-design/icons";
+import SettingPopover from "@/components/settingPopover/SettingPopover";
 
 function PrimaryHeader(props) {
   const {
     collapsed,
-    setCollapsed,
     tabsBarShow,
-    setTabsBarShow,
     zenModeOpen,
+    setCollapsed,
+    setTabsBarShow,
     setZenModeOpen,
+    onResetSettingOptions,
   } = props;
   const dropdownItems = [
     {
@@ -37,39 +30,6 @@ function PrimaryHeader(props) {
       danger: true,
     },
   ];
-  const settingItemStyle = {
-    display: "flex",
-    alignItems: "center",
-  };
-  const settingItemLabelStyle = {
-    width: "80px",
-  };
-  const popoverContent = (
-    <>
-      {/* 页签开关 */}
-      <div style={settingItemStyle}>
-        <div style={settingItemLabelStyle}>页签：</div>
-        <Switch
-          checked={tabsBarShow}
-          onChange={() => setTabsBarShow(!tabsBarShow)}
-        />
-      </div>
-      <div style={{ height: "8px" }} />
-      {/* 禅模式开关 */}
-      <div style={settingItemStyle}>
-        <div style={settingItemLabelStyle}>禅模式：</div>
-        <Switch
-          checked={zenModeOpen}
-          onChange={() => setZenModeOpen(!zenModeOpen)}
-        />
-      </div>
-      <Divider style={{ margin: "8px 0" }} />
-      <div style={{ textAlign: "end", cursor: "pointer" }}>
-        <span>恢复默认</span>
-        <RedoOutlined />
-      </div>
-    </>
-  );
 
   function handleNavProfile() {
     console.log("nav to profile");
@@ -94,7 +54,19 @@ function PrimaryHeader(props) {
           <BellOutlined className="header-icon" />
         </Badge>
         {/* 设置 */}
-        <Popover content={popoverContent} title="设置" trigger="click">
+        <Popover
+          content={
+            <SettingPopover
+              tabsBarShow={tabsBarShow}
+              zenModeOpen={zenModeOpen}
+              setTabsBarShow={setTabsBarShow}
+              setZenModeOpen={setZenModeOpen}
+              onResetSettingOptions={onResetSettingOptions}
+            />
+          }
+          title="设置"
+          trigger="click"
+        >
           <SettingOutlined className="header-icon" />
         </Popover>
         {/* 个人信息 */}

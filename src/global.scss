@@ -1,9 +1,35 @@
-// 布局页: 盒子的间距、背景色和圆角等(全局变量)
+// 布局页: 盒子的间距、背景色和圆角等
 $layout-box-space-sm: 16px;
 $layout-box-space-md: 32px;
 $layout-box-bgc: #fff;
 $box-radius: 8px;
 $icon-opacity-num: 0.7;
+
+/* 全局样式变量 */
+$placeholder-box-height-xs: 8px;
+$animation-rotate-duration: 0.5s;
+// 主要颜色，用于链接、按钮、选中的元素等
+$primary-color: #1890ff;
+// 成功状态的颜色，用于成功的消息、成功的状态指示等
+$success-color: #52c41a;
+// 信息状态的颜色，用于信息的消息、信息的状态指示等
+$info-color: #1890ff;
+// 警告状态的颜色，用于警告的消息、警告的状态指示等
+$warning-color: #faad14;
+// 错误状态的颜色，用于错误的消息、错误的状态指示等
+$error-color: #f5222d;
+// 高亮颜色，用于重要的文字和活动区域的背景
+$highlight-color: #f5222d;
+// 禁用状态的颜色，用于禁用的元素和不可用的文字
+$disabled-color: rgba(0, 0, 0, 0.25);
+// 基础边框颜色，用于大多数边框
+$border-color-base: #d9d9d9;
+// 分割线颜色，用于列表和卡片等元素的分割线
+$border-color-split: #f0f0f0;
+// 基础背景色，用于表格等元素的背景
+$background-color-base: #f5f5f5;
+// 浅色背景色，用于表格的斑马线等元素的背景
+$background-color-light: #fafafa;
 
 @mixin sticky-fragment {
   position: sticky;
@@ -122,7 +148,7 @@ $icon-opacity-num: 0.7;
 
             .arrow {
               margin: 0 8px;
-              transition: transform 0.5s;
+              transition: transform $animation-rotate-duration;
             }
 
             .avatar {
@@ -130,7 +156,7 @@ $icon-opacity-num: 0.7;
               color: #fff;
             }
 
-            // 鼠标移入时arrow旋转180度，移出时恢复，且过渡时间都是0.5s
+            // 鼠标移入时arrow旋转180度，移出时恢复
             &:hover .arrow {
               transform: rotate(180deg);
             }
@@ -209,4 +235,20 @@ $icon-opacity-num: 0.7;
 // content上边距(不带tabs-bar的content)
 .content-without-tabs-mt {
   margin-top: $layout-box-space-sm;
+}
+// 占位盒子
+.placeholder-box {
+  height: $placeholder-box-height-xs;
+}
+// 元素旋转
+.rotate {
+  animation: rotate $animation-rotate-duration linear;
+}
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

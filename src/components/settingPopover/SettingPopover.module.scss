@@ -1,0 +1,26 @@
+@use "../../global.scss" as global;
+
+.settingPopover {
+  .settingItem {
+    @include global.flex-row-y-center;
+
+    .settingItemLabel {
+      width: 80px;
+    }
+  }
+
+  .resetWrapper {
+    display: flex;
+    justify-content: end;
+    color: global.$warning-color;
+
+    .reset {
+      display: inline-block;
+      cursor: pointer;
+
+      &:hover {
+        opacity: global.$icon-opacity-num;
+      }
+    }
+  }
+}
