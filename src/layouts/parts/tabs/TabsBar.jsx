@@ -1,6 +1,6 @@
-import { Tabs } from "antd";
+import { Tabs, Modal } from "antd";
 import { useState } from "react";
-import { ClearOutlined } from "@ant-design/icons";
+import { ClearOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
 
 function TabsBar() {
   const initialItems = [
@@ -82,7 +82,17 @@ function TabsBar() {
   function onEdit(key, action) {
     removeItem(key);
   }
-  function handleClearTabs() {
+  function handleClearIcon() {
+    Modal.confirm({
+      style: { top: 132 },
+      title: "清除页签",
+      icon: <ExclamationCircleOutlined />,
+      content: "确定要清除所有页签吗？",
+      maskClosable: true,
+      onOk: handleModalOk,
+    });
+  }
+  function handleModalOk() {
     setItems([items[0]]);
     setActiveKey(items[0].key);
   }
@@ -102,7 +112,7 @@ function TabsBar() {
         />
       </div>
       <div className="right">
-        <ClearOutlined className="clear" onClick={handleClearTabs} />
+        <ClearOutlined className="clear" onClick={handleClearIcon} />
       </div>
     </div>
   );
