@@ -1,61 +1,27 @@
 import { Tabs, Modal } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ClearOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
+import { connect } from "react-redux";
+import { useLocation } from "react-router-dom";
 
-function TabsBar() {
-  const initialItems = [
-    {
-      key: "1",
-      label: "我的工作台",
-      closable: false,
-    },
-    {
-      key: "2",
-      label: "基本用法",
-    },
-    {
-      key: "3",
-      label: "测试测试隐藏1",
-    },
-    {
-      key: "4",
-      label: "测试测试隐藏2",
-    },
-    {
-      key: "5",
-      label: "测试测试隐藏3",
-    },
-    {
-      key: "6",
-      label: "测试测试隐藏4",
-    },
-    {
-      key: "7",
-      label: "测试测试隐藏5",
-    },
-    {
-      key: "8",
-      label: "测试测试隐藏6",
-    },
-    {
-      key: "9",
-      label: "测试测试隐藏7",
-    },
-    {
-      key: "10",
-      label: "测试测试隐藏8",
-    },
-    {
-      key: "11",
-      label: "测试测试隐藏9",
-    },
-    {
-      key: "12",
-      label: "测试测试隐藏10",
-    },
-  ];
-  const [activeKey, setActiveKey] = useState(initialItems[0].key);
-  const [items, setItems] = useState(initialItems);
+function TabsBar({ initialItems }) {
+  const [activeKey, setActiveKey] = useState();
+  const [items, setItems] = useState();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (initialItems.length) {
+      setActiveKey(initialItems[0].key);
+      setItems(initialItems);
+    }
+  }, []);
+  useEffect(() => {
+    if (initialItems.length) {
+      console.log(location.pathname.slice(1));
+      setActiveKey(location.pathname.slice(1));
+      setItems(initialItems);
+    }
+  }, [initialItems]);
 
   function removeItem(targetKey) {
     let newActiveKey = activeKey;
@@ -118,4 +84,10 @@ function TabsBar() {
   );
 }
 
-export default TabsBar;
+const mapStateToProps = (state) => {
+  return {
+    initialItems: state.tab,
+  };
+};
+
+export default connect(mapStateToProps)(TabsBar);
