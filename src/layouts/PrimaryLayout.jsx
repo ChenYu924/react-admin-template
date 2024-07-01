@@ -51,7 +51,6 @@ function PrimaryLayout() {
         trigger={null}
         collapsible
         collapsed={collapsed}
-        onWheel={(e) => e.stopPropagation()}
       >
         <SiderMenu />
       </Sider>
