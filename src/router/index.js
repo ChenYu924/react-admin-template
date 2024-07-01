@@ -5,6 +5,14 @@ import Login from "@/pages/login/Login";
 import PrimaryLayout from "@/layouts/PrimaryLayout";
 // 引入通用布局的二级路由页面
 import WorkBench from "@/pages/workBench/WorkBench";
+import FloatButtonPosition from "@/pages/button/FloatButtonPosition";
+import DividerShow from "@/pages/divider/DividerShow";
+import GridBasic from "@/pages/grid/GridBasic";
+import GridGutter from "@/pages/grid/GridGutter";
+import GridOffset from "@/pages/grid/GridOffset";
+import GridAlign from "@/pages/grid/GridAlign";
+import AnchorShow from "@/pages/nav/anchor/AnchorShow";
+import DropdownBasic from "@/pages/nav/dropdown/DropdownBasic";
 import FormBasic from "@/pages/form/FormBasic";
 import FormCall from "@/pages/form/FormCall";
 import FormLayout from "@/pages/form/FormLayout";
@@ -29,6 +37,38 @@ const router = createBrowserRouter([
       {
         path: "/workbench",
         element: <WorkBench />,
+      },
+      {
+        path: "/float-button-position",
+        element: <FloatButtonPosition />,
+      },
+      {
+        path: "/divider-show",
+        element: <DividerShow />,
+      },
+      {
+        path: "/grid-basic",
+        element: <GridBasic />,
+      },
+      {
+        path: "/grid-gutter",
+        element: <GridGutter />,
+      },
+      {
+        path: "/grid-offset",
+        element: <GridOffset />,
+      },
+      {
+        path: "/grid-align",
+        element: <GridAlign />,
+      },
+      {
+        path: "/anchor-show",
+        element: <AnchorShow />,
+      },
+      {
+        path: "/dropdown-basic",
+        element: <DropdownBasic />,
       },
       {
         path: "/form-basic",

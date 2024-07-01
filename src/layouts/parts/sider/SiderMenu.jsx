@@ -3,19 +3,77 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Menu } from "antd";
 import {
-  DesktopOutlined,
+  HomeOutlined,
   TableOutlined,
   CloseOutlined,
   FormOutlined,
+  VerticalAlignTopOutlined,
+  AlignLeftOutlined,
+  DashOutlined,
+  LayoutOutlined,
 } from "@ant-design/icons";
 
-function SiderMenu({ tabData }) {
+function SiderMenu() {
   // 侧边栏菜单项
   const menuItems = [
     {
       key: "workbench",
       label: "我的工作台",
-      icon: <DesktopOutlined />,
+      icon: <HomeOutlined />,
+    },
+    {
+      key: "float-button-position",
+      label: "FloatButton 悬浮按钮",
+      icon: <VerticalAlignTopOutlined />,
+    },
+    {
+      key: "divider-show",
+      label: "Divider 分割线",
+      icon: <DashOutlined />,
+    },
+    {
+      key: "grid",
+      label: "Grid 栅格",
+      icon: <AlignLeftOutlined />,
+      children: [
+        {
+          key: "grid-basic",
+          label: "基础栅格",
+        },
+        {
+          key: "grid-gutter",
+          label: "区块间隔",
+        },
+        {
+          key: "grid-offset",
+          label: "左右偏移",
+        },
+        {
+          key: "grid-align",
+          label: "栅格对齐",
+        },
+      ],
+    },
+    {
+      key: "nav",
+      label: "布局相关",
+      icon: <LayoutOutlined />,
+      children: [
+        {
+          key: "anchor-show",
+          label: "Anchor 锚点",
+        },
+        {
+          key: "dropdown",
+          label: "下拉菜单",
+          children: [
+            {
+              key: "dropdown-basic",
+              label: "下拉菜单基本",
+            },
+          ],
+        },
+      ],
     },
     {
       key: "form",
@@ -93,14 +151,29 @@ function SiderMenu({ tabData }) {
   }
   function handleLogoClick() {
     menuItemChange(menuItems[0].key);
+    dispatch({ type: "tab-slice/setActiveKey", payload: menuItems[0].key });
   }
   function handleMenuItemClick({ key, domEvent }) {
-    const tab = {
-      key,
-      label: domEvent.target.innerText,
-      closable: true,
-    };
-    dispatch({ type: "tab-slice/setTab", payload: tab });
+    console.log("domEvent", domEvent.target.innerText);
+    if (domEvent.target.innerText) {
+      const tab = {
+        key,
+        label: domEvent.target.innerText,
+        closable: true,
+      };
+      dispatch({ type: "tab-slice/setTab", payload: tab });
+    } else {
+      menuItems.forEach((item) => {
+        if (item.key === key) {
+          const tab = {
+            key,
+            label: item.label,
+            closable: true,
+          };
+          dispatch({ type: "tab-slice/setTab", payload: tab });
+        }
+      });
+    }
     menuItemChange(key);
   }
 

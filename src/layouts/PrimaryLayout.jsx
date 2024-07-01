@@ -16,6 +16,19 @@ function PrimaryLayout() {
   // 是否开启禅模式
   const [zenModeOpen, setZenModeOpen] = useState(false);
 
+  function judgeSiderWidth() {
+    return zenModeOpen ? 0 : 288;
+  }
+  function getSiderClassNames() {
+    return classNames("sider", {
+      "sider-hidden": zenModeOpen,
+    });
+  }
+  function getHeaderClassNames() {
+    return classNames("header", "bottom-shadow", {
+      "header-hidden": zenModeOpen,
+    });
+  }
   function getContentClassNames() {
     return classNames("content", {
       "left-top-radius": !tabsBarShow,
@@ -32,38 +45,35 @@ function PrimaryLayout() {
 
   return (
     <Layout className="primary-layout">
-      {!zenModeOpen && (
-        <Sider
-          width={288}
-          className="sider"
-          trigger={null}
-          collapsible
-          collapsed={collapsed}
-        >
-          <SiderMenu />
-        </Sider>
-      )}
+      <Sider
+        width={judgeSiderWidth()}
+        className={getSiderClassNames()}
+        trigger={null}
+        collapsible
+        collapsed={collapsed}
+        onWheel={(e) => e.stopPropagation()}
+      >
+        <SiderMenu />
+      </Sider>
       <Layout className="main">
-        {!zenModeOpen && (
-          <Header className="header bottom-shadow">
-            <PrimaryHeader
-              collapsed={collapsed}
-              tabsBarShow={tabsBarShow}
-              zenModeOpen={zenModeOpen}
-              setCollapsed={setCollapsed}
-              setTabsBarShow={setTabsBarShow}
-              setZenModeOpen={setZenModeOpen}
-              onResetSettingOptions={handleResetSettingOptions}
-            />
-          </Header>
-        )}
+        <Header className={getHeaderClassNames()}>
+          <PrimaryHeader
+            collapsed={collapsed}
+            tabsBarShow={tabsBarShow}
+            zenModeOpen={zenModeOpen}
+            setCollapsed={setCollapsed}
+            setTabsBarShow={setTabsBarShow}
+            setZenModeOpen={setZenModeOpen}
+            onResetSettingOptions={handleResetSettingOptions}
+          />
+        </Header>
         {tabsBarShow && <TabsBar />}
         <Content className={getContentClassNames()}>
           <Outlet />
           <FloatButton.BackTop className="back-top-position" />
           {zenModeOpen && (
             <FloatButton
-              className="back-top-position"
+              className="quit-zen"
               type="primary"
               icon={<ShrinkOutlined />}
               tooltip="退出禅模式"

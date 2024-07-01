@@ -1,4 +1,4 @@
-import { Divider, Switch } from "antd";
+import { Divider, Switch, message } from "antd";
 import { RedoOutlined } from "@ant-design/icons";
 import styles from "./SettingPopover.module.scss";
 import classNames from "classnames";
@@ -10,10 +10,12 @@ import { useState } from "react";
 */
 function SettingPopover(props) {
   const {
+    collapsed,
     tabsBarShow,
     zenModeOpen,
     setTabsBarShow,
     setZenModeOpen,
+    setPopoverOpen,
     onResetSettingOptions,
   } = props;
   const [isRotate, setIsRotate] = useState(false);
@@ -24,6 +26,14 @@ function SettingPopover(props) {
     setTimeout(() => {
       setIsRotate(false);
     }, 500);
+  }
+  function zenModeChange() {
+    if (collapsed) {
+      message.warning("请先展开侧边菜单栏，再开启禅模式");
+      return;
+    }
+    setZenModeOpen(!zenModeOpen);
+    setPopoverOpen(false);
   }
 
   return (
@@ -40,10 +50,7 @@ function SettingPopover(props) {
       {/* 禅模式开关 */}
       <div className={styles.settingItem}>
         <div className={styles.settingItemLabel}>禅模式：</div>
-        <Switch
-          checked={zenModeOpen}
-          onChange={() => setZenModeOpen(!zenModeOpen)}
-        />
+        <Switch checked={zenModeOpen} onChange={zenModeChange} />
       </div>
       <Divider style={{ margin: "12px 0" }} />
       <div className={styles.resetWrapper}>

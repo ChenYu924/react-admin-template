@@ -98,6 +98,10 @@ $background-color-light: #fafafa;
     }
   }
 
+  .sider-hidden {
+    visibility: hidden;
+  }
+
   .main {
     min-height: 100vh;
 
@@ -165,6 +169,11 @@ $background-color-light: #fafafa;
       }
     }
 
+    .header-hidden {
+      visibility: hidden;
+      height: 0;
+    }
+
     .tabs-bar {
       @include flex-row-y-center;
       padding: 0 $layout-box-space-sm;
@@ -210,6 +219,11 @@ $background-color-light: #fafafa;
       .back-top-position {
         right: $layout-box-space-md;
         bottom: $layout-box-space-md;
+      }
+
+      .quit-zen {
+        right: $layout-box-space-sm * 2 + 40px;
+        bottom: $layout-box-space-sm * 2 + 40px;
       }
     }
   }

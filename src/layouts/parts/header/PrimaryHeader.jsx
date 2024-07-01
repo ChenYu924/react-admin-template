@@ -8,6 +8,7 @@ import {
   SettingOutlined,
 } from "@ant-design/icons";
 import SettingPopover from "@/components/settingPopover/SettingPopover";
+import { useState } from "react";
 
 function PrimaryHeader(props) {
   const {
@@ -30,6 +31,7 @@ function PrimaryHeader(props) {
       danger: true,
     },
   ];
+  const [popoverOpen, setPopoverOpen] = useState(false);
 
   function handleNavProfile() {
     console.log("nav to profile");
@@ -57,17 +59,24 @@ function PrimaryHeader(props) {
         <Popover
           content={
             <SettingPopover
+              collapsed={collapsed}
               tabsBarShow={tabsBarShow}
               zenModeOpen={zenModeOpen}
               setTabsBarShow={setTabsBarShow}
               setZenModeOpen={setZenModeOpen}
+              setPopoverOpen={setPopoverOpen}
               onResetSettingOptions={onResetSettingOptions}
             />
           }
           title="设置"
           trigger="click"
+          open={popoverOpen}
+          onOpenChange={() => setPopoverOpen(false)}
         >
-          <SettingOutlined className="header-icon" />
+          <SettingOutlined
+            className="header-icon"
+            onClick={() => setPopoverOpen(!popoverOpen)}
+          />
         </Popover>
         {/* 个人信息 */}
         <Dropdown menu={{ items: dropdownItems }}>
