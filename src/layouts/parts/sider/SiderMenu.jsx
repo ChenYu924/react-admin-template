@@ -1,3 +1,6 @@
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import { Menu } from "antd";
 import {
   DesktopOutlined,
@@ -5,11 +8,9 @@ import {
   CloseOutlined,
   FormOutlined,
 } from "@ant-design/icons";
-import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
 
-function SiderMenu() {
+function SiderMenu({ tabData }) {
+  // 侧边栏菜单项
   const menuItems = [
     {
       key: "workbench",
@@ -70,6 +71,7 @@ function SiderMenu() {
   ];
   const [selectedMenuItem, setSelectedMenuItem] = useState();
   const navigate = useNavigate();
+  const stateActiveKey = useSelector((state) => state.tab.activeKey);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -81,6 +83,9 @@ function SiderMenu() {
     };
     dispatch({ type: "tab-slice/setTab", payload: tab });
   }, []);
+  useEffect(() => {
+    menuItemChange(stateActiveKey);
+  }, [stateActiveKey]);
 
   function menuItemChange(key) {
     setSelectedMenuItem(key);

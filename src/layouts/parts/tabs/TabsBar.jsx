@@ -1,51 +1,32 @@
-import { Tabs, Modal } from "antd";
 import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Tabs, Modal } from "antd";
 import { ClearOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
-import { connect } from "react-redux";
-import { useLocation } from "react-router-dom";
 
-function TabsBar({ initialItems }) {
+function TabsBar() {
   const [activeKey, setActiveKey] = useState();
   const [items, setItems] = useState();
-  const location = useLocation();
+  const tabData = useSelector((state) => state.tab);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    if (initialItems.length) {
-      setActiveKey(initialItems[0].key);
-      setItems(initialItems);
+    if (tabData.tabList.length) {
+      setActiveKey(tabData.activeKey);
+      setItems(tabData.tabList);
     }
-  }, []);
-  useEffect(() => {
-    if (initialItems.length) {
-      console.log(location.pathname.slice(1));
-      setActiveKey(location.pathname.slice(1));
-      setItems(initialItems);
-    }
-  }, [initialItems]);
+  }, [tabData]);
 
+  function handleModalOk() {
+    dispatch({ type: "tab-slice/setRemoveAll" });
+  }
   function removeItem(targetKey) {
-    let newActiveKey = activeKey;
-    let lastIndex = -1;
-    items.forEach((item, i) => {
-      if (item.key === targetKey) {
-        lastIndex = i - 1;
-      }
-    });
-    const newPanes = items.filter((item) => item.key !== targetKey);
-    if (newPanes.length && newActiveKey === targetKey) {
-      if (lastIndex >= 0) {
-        newActiveKey = newPanes[lastIndex].key;
-      } else {
-        newActiveKey = newPanes[0].key;
-      }
-    }
-    setItems(newPanes);
-    setActiveKey(newActiveKey);
+    dispatch({ type: "tab-slice/setRemoveTab", payload: targetKey });
   }
   function onChange(newActiveKey) {
     setActiveKey(newActiveKey);
+    dispatch({ type: "tab-slice/setActiveKey", payload: newActiveKey });
   }
-  function onEdit(key, action) {
+  function onEdit(key) {
     removeItem(key);
   }
   function handleClearIcon() {
@@ -57,10 +38,6 @@ function TabsBar({ initialItems }) {
       maskClosable: true,
       onOk: handleModalOk,
     });
-  }
-  function handleModalOk() {
-    setItems([items[0]]);
-    setActiveKey(items[0].key);
   }
 
   return (
@@ -78,16 +55,12 @@ function TabsBar({ initialItems }) {
         />
       </div>
       <div className="right">
-        <ClearOutlined className="clear" onClick={handleClearIcon} />
+        {tabData.tabList.length > 1 && (
+          <ClearOutlined className="clear" onClick={handleClearIcon} />
+        )}
       </div>
     </div>
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    initialItems: state.tab,
-  };
-};
-
-export default connect(mapStateToProps)(TabsBar);
+export default TabsBar;

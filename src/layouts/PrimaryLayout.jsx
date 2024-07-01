@@ -1,11 +1,11 @@
-import { Layout, FloatButton } from "antd";
+import { useState } from "react";
 import { Outlet } from "react-router-dom";
+import { Layout, FloatButton } from "antd";
+import { ShrinkOutlined } from "@ant-design/icons";
+import classNames from "classnames";
 import SiderMenu from "@/layouts/parts/sider/SiderMenu";
 import PrimaryHeader from "@/layouts/parts/header/PrimaryHeader";
 import TabsBar from "@/layouts/parts/tabs/TabsBar";
-import { useState } from "react";
-import classNames from "classnames";
-import { ShrinkOutlined } from "@ant-design/icons";
 
 function PrimaryLayout() {
   const { Header, Sider, Content } = Layout;
