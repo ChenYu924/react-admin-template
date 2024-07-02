@@ -11,6 +11,10 @@ function PrimaryLayout() {
   const { Header, Sider, Content } = Layout;
   // 侧边菜单栏是否收起
   const [collapsed, setCollapsed] = useState(false);
+  // 当前展开的sub菜单项
+  const [openedKeys, setOpenedKeys] = useState([]);
+  // 是否开启菜单手风琴模式
+  const [menuAccordionOpen, setMenuAccordionOpen] = useState(true);
   // 页签条是否展示
   const [tabsBarShow, setTabsBarShow] = useState(true);
   // 是否开启禅模式
@@ -39,6 +43,7 @@ function PrimaryLayout() {
   }
   // 重置设置选项
   function handleResetSettingOptions() {
+    setMenuAccordionOpen(true);
     setTabsBarShow(true);
     setZenModeOpen(false);
   }
@@ -52,21 +57,27 @@ function PrimaryLayout() {
         collapsible
         collapsed={collapsed}
       >
-        <SiderMenu />
+        <SiderMenu
+          openedKeys={openedKeys}
+          menuAccordionOpen={menuAccordionOpen}
+          setOpenedKeys={setOpenedKeys}
+        />
       </Sider>
       <Layout className="main">
         <Header className={getHeaderClassNames()}>
           <PrimaryHeader
             collapsed={collapsed}
+            menuAccordionOpen={menuAccordionOpen}
             tabsBarShow={tabsBarShow}
             zenModeOpen={zenModeOpen}
             setCollapsed={setCollapsed}
+            setMenuAccordionOpen={setMenuAccordionOpen}
             setTabsBarShow={setTabsBarShow}
             setZenModeOpen={setZenModeOpen}
             onResetSettingOptions={handleResetSettingOptions}
           />
         </Header>
-        {tabsBarShow && <TabsBar />}
+        {tabsBarShow && <TabsBar setOpenedKeys={setOpenedKeys} />}
         <Content className={getContentClassNames()}>
           <Outlet />
           <FloatButton.BackTop className="back-top-position" />

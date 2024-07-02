@@ -13,7 +13,8 @@ import {
   LayoutOutlined,
 } from "@ant-design/icons";
 
-function SiderMenu() {
+function SiderMenu(props) {
+  const { openedKeys, menuAccordionOpen, setOpenedKeys } = props;
   // 侧边栏菜单项
   const menuItems = [
     {
@@ -127,10 +128,11 @@ function SiderMenu() {
       icon: <CloseOutlined />,
     },
   ];
-  const [selectedMenuItem, setSelectedMenuItem] = useState();
-  const navigate = useNavigate();
+  const levelKeys = getLevelKeys(menuItems);
   const stateActiveKey = useSelector((state) => state.tab.activeKey);
   const dispatch = useDispatch();
+  const [selectedMenuItem, setSelectedMenuItem] = useState();
+  const navigate = useNavigate();
 
   useEffect(() => {
     menuItemChange(menuItems[0].key);
@@ -144,7 +146,27 @@ function SiderMenu() {
   useEffect(() => {
     menuItemChange(stateActiveKey);
   }, [stateActiveKey]);
+  useEffect(() => {
+    if (menuAccordionOpen) {
+      setOpenedKeys([]);
+    }
+  }, [menuAccordionOpen]);
 
+  function getLevelKeys(items1) {
+    const key = {};
+    const func = (items2, level = 1) => {
+      items2.forEach((item) => {
+        if (item.key) {
+          key[item.key] = level;
+        }
+        if (item.children) {
+          func(item.children, level + 1);
+        }
+      });
+    };
+    func(items1);
+    return key;
+  }
   function menuItemChange(key) {
     setSelectedMenuItem(key);
     navigate(`/${key}`);
@@ -154,7 +176,6 @@ function SiderMenu() {
     dispatch({ type: "tab-slice/setActiveKey", payload: menuItems[0].key });
   }
   function handleMenuItemClick({ key, domEvent }) {
-    console.log("domEvent", domEvent.target.innerText);
     if (domEvent.target.innerText) {
       const tab = {
         key,
@@ -176,6 +197,31 @@ function SiderMenu() {
     }
     menuItemChange(key);
   }
+  function subMenuChange(openKeys) {
+    if (menuAccordionOpen) {
+      const currentOpenKey = openKeys.find(
+        (key) => openedKeys.indexOf(key) === -1,
+      );
+      // open
+      if (currentOpenKey !== undefined) {
+        const repeatIndex = openKeys
+          .filter((key) => key !== currentOpenKey)
+          .findIndex((key) => levelKeys[key] === levelKeys[currentOpenKey]);
+        setOpenedKeys(
+          openKeys
+            // remove repeat key
+            .filter((_, index) => index !== repeatIndex)
+            // remove current level all child
+            .filter((key) => levelKeys[key] <= levelKeys[currentOpenKey]),
+        );
+      } else {
+        // close
+        setOpenedKeys(openKeys);
+      }
+    } else {
+      setOpenedKeys(openKeys);
+    }
+  }
 
   return (
     <>
@@ -188,6 +234,8 @@ function SiderMenu() {
         mode="inline"
         theme="dark"
         onClick={handleMenuItemClick}
+        openKeys={openedKeys}
+        onOpenChange={subMenuChange}
       />
     </>
   );

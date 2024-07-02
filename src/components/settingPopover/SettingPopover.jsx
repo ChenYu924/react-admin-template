@@ -11,8 +11,10 @@ import { useState } from "react";
 function SettingPopover(props) {
   const {
     collapsed,
+    menuAccordionOpen,
     tabsBarShow,
     zenModeOpen,
+    setMenuAccordionOpen,
     setTabsBarShow,
     setZenModeOpen,
     setPopoverOpen,
@@ -38,6 +40,15 @@ function SettingPopover(props) {
 
   return (
     <div className={styles.settingPopover} style={{ marginTop: "4px" }}>
+      {/* 菜单手风琴模式开关 */}
+      <div className={styles.settingItem}>
+        <div className={styles.settingItemLabel}>菜单手风琴：</div>
+        <Switch
+          checked={menuAccordionOpen}
+          onChange={() => setMenuAccordionOpen(!menuAccordionOpen)}
+        />
+      </div>
+      <div className="placeholder-box" />
       {/* 页签开关 */}
       <div className={styles.settingItem}>
         <div className={styles.settingItemLabel}>页签：</div>

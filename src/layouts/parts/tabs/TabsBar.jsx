@@ -3,7 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { Tabs, Modal } from "antd";
 import { ClearOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
 
-function TabsBar() {
+function TabsBar(props) {
+  const { setOpenedKeys } = props;
   const [activeKey, setActiveKey] = useState();
   const [items, setItems] = useState();
   const tabData = useSelector((state) => state.tab);
@@ -18,6 +19,7 @@ function TabsBar() {
 
   function handleModalOk() {
     dispatch({ type: "tab-slice/setRemoveAll" });
+    setOpenedKeys([]);
   }
   function removeItem(targetKey) {
     dispatch({ type: "tab-slice/setRemoveTab", payload: targetKey });

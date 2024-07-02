@@ -1,4 +1,4 @@
-import { Button, Avatar, Badge, Dropdown, Popover } from "antd";
+import { Button, Avatar, Badge, Dropdown, Popover, Breadcrumb } from "antd";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -13,9 +13,11 @@ import { useState } from "react";
 function PrimaryHeader(props) {
   const {
     collapsed,
+    menuAccordionOpen,
     tabsBarShow,
     zenModeOpen,
     setCollapsed,
+    setMenuAccordionOpen,
     setTabsBarShow,
     setZenModeOpen,
     onResetSettingOptions,
@@ -49,6 +51,12 @@ function PrimaryHeader(props) {
           icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
           onClick={() => setCollapsed(!collapsed)}
         />
+        <Breadcrumb
+          style={{ marginLeft: "14px" }}
+          itemRender={(route, params, routes, paths) => {
+            console.log(route, params, routes, paths);
+          }}
+        />
       </div>
       <div className="right">
         {/* 消息中心 */}
@@ -60,8 +68,10 @@ function PrimaryHeader(props) {
           content={
             <SettingPopover
               collapsed={collapsed}
+              menuAccordionOpen={menuAccordionOpen}
               tabsBarShow={tabsBarShow}
               zenModeOpen={zenModeOpen}
+              setMenuAccordionOpen={setMenuAccordionOpen}
               setTabsBarShow={setTabsBarShow}
               setZenModeOpen={setZenModeOpen}
               setPopoverOpen={setPopoverOpen}

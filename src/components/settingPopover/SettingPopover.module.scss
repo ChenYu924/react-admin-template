@@ -3,9 +3,10 @@
 .settingPopover {
   .settingItem {
     @include global.flex-row-y-center;
+    justify-content: space-between;
 
     .settingItemLabel {
-      width: 80px;
+      width: 120px;
     }
   }
 
