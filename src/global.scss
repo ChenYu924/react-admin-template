@@ -86,8 +86,10 @@ $background-color-light: #fafafa;
     overflow: auto;
 
     .logo-wrapper {
+      @include sticky-fragment;
       height: 64px;
       padding: $layout-box-space-sm;
+      background-color: #001529;
 
       .logo {
         height: 100%;

@@ -5,10 +5,10 @@ import { ClearOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
 
 function TabsBar(props) {
   const { setOpenedKeys } = props;
-  const [activeKey, setActiveKey] = useState();
-  const [items, setItems] = useState();
   const tabData = useSelector((state) => state.tab);
   const dispatch = useDispatch();
+  const [activeKey, setActiveKey] = useState();
+  const [items, setItems] = useState();
 
   useEffect(() => {
     if (tabData.tabList.length) {
