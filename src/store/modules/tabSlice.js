@@ -33,12 +33,6 @@ const tabSlice = createSlice({
         }
       }
     },
-    setActiveKey(state, action) {
-      return {
-        ...state,
-        activeKey: action.payload,
-      };
-    },
     setRemoveTab(state, action) {
       const calcTabList = state.tabList.filter(
         (tab) => tab.key !== action.payload,
@@ -68,8 +62,13 @@ const tabSlice = createSlice({
         };
       }
     },
+    setActiveKey(state, action) {
+      return {
+        ...state,
+        activeKey: action.payload,
+      };
+    },
   },
 });
 
-// 导出reducer
 export default tabSlice.reducer;

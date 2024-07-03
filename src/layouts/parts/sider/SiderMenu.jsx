@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Menu } from "antd";
@@ -131,8 +131,9 @@ function SiderMenu(props) {
   const levelKeys = getLevelKeys(menuItems);
   const stateActiveKey = useSelector((state) => state.tab.activeKey);
   const dispatch = useDispatch();
-  const [selectedMenuItem, setSelectedMenuItem] = useState();
   const navigate = useNavigate();
+  const menuWrapperRef = useRef(null);
+  const [selectedMenuItem, setSelectedMenuItem] = useState();
 
   useEffect(() => {
     menuItemChange(menuItems[0].key);
@@ -140,8 +141,12 @@ function SiderMenu(props) {
       key: menuItems[0].key,
       label: menuItems[0].label,
       closable: false,
+      path: [menuItems[0].label],
     };
-    dispatch({ type: "tab-slice/setTab", payload: tab });
+    dispatch({
+      type: "tab-slice/setTab",
+      payload: tab,
+    });
   }, []);
   useEffect(() => {
     menuItemChange(stateActiveKey);
@@ -171,16 +176,36 @@ function SiderMenu(props) {
     setSelectedMenuItem(key);
     navigate(`/${key}`);
   }
+  function getBreadcrumbLabelList(keyPath) {
+    const labelList = [];
+    const func = (items, key) => {
+      items.forEach((item) => {
+        if (item.key === key) {
+          labelList.push(item.label);
+        }
+        if (item.children) {
+          func(item.children, key);
+        }
+      });
+    };
+    keyPath.forEach((key) => {
+      func(menuItems, key);
+    });
+    return labelList;
+  }
   function handleLogoClick() {
     menuItemChange(menuItems[0].key);
     dispatch({ type: "tab-slice/setActiveKey", payload: menuItems[0].key });
+    menuWrapperRef.current.scrollTop = 0;
   }
-  function handleMenuItemClick({ key, domEvent }) {
+  function handleMenuItemClick({ key, keyPath, domEvent }) {
+    const path = getBreadcrumbLabelList(keyPath.reverse());
     if (domEvent.target.innerText) {
       const tab = {
         key,
         label: domEvent.target.innerText,
         closable: true,
+        path,
       };
       dispatch({ type: "tab-slice/setTab", payload: tab });
     } else {
@@ -190,6 +215,7 @@ function SiderMenu(props) {
             key,
             label: item.label,
             closable: true,
+            path,
           };
           dispatch({ type: "tab-slice/setTab", payload: tab });
         }
@@ -224,7 +250,7 @@ function SiderMenu(props) {
   }
 
   return (
-    <>
+    <div className="menu-wrapper" ref={menuWrapperRef}>
       <div className="logo-wrapper">
         <div className="logo" onClick={handleLogoClick} />
       </div>
@@ -237,7 +263,7 @@ function SiderMenu(props) {
         openKeys={openedKeys}
         onOpenChange={subMenuChange}
       />
-    </>
+    </div>
   );
 }
 

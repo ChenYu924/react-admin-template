@@ -1,4 +1,6 @@
-import { Button, Avatar, Badge, Dropdown, Popover, Breadcrumb } from "antd";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { Button, Avatar, Badge, Dropdown, Popover } from "antd";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -8,7 +10,6 @@ import {
   SettingOutlined,
 } from "@ant-design/icons";
 import SettingPopover from "@/components/settingPopover/SettingPopover";
-import { useState } from "react";
 
 function PrimaryHeader(props) {
   const {
@@ -33,7 +34,17 @@ function PrimaryHeader(props) {
       danger: true,
     },
   ];
+  const stateTab = useSelector((state) => state.tab);
   const [popoverOpen, setPopoverOpen] = useState(false);
+  const [currentBreadcrumb, setCurrentBreadcrumb] = useState([]);
+
+  useEffect(() => {
+    stateTab.tabList.forEach((item) => {
+      if (item.key === stateTab.activeKey) {
+        setCurrentBreadcrumb(item.path);
+      }
+    });
+  }, [stateTab]);
 
   function handleNavProfile() {
     console.log("nav to profile");
@@ -46,17 +57,31 @@ function PrimaryHeader(props) {
     <div className="wrapper">
       <div className="left">
         <Button
+          style={{ marginRight: "16px" }}
           className="collapsed-button"
           type="text"
           icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
           onClick={() => setCollapsed(!collapsed)}
         />
-        <Breadcrumb
-          style={{ marginLeft: "14px" }}
-          itemRender={(route, params, routes, paths) => {
-            console.log(route, params, routes, paths);
-          }}
-        />
+        {currentBreadcrumb.map((item, index) => {
+          if (index === currentBreadcrumb.length - 1) {
+            return (
+              <span
+                key={index}
+                className="breadcrumb-item breadcrumb-item-last"
+              >
+                {item}
+              </span>
+            );
+          } else {
+            return (
+              <span key={index} className="breadcrumb-item">
+                {item}
+                <span className="breadcrumb-item-Oblique">/</span>
+              </span>
+            );
+          }
+        })}
       </div>
       <div className="right">
         {/* 消息中心 */}

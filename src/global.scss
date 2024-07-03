@@ -83,19 +83,23 @@ $background-color-light: #fafafa;
   .sider {
     @include sticky-fragment;
     height: 100vh;
-    overflow: auto;
 
-    .logo-wrapper {
-      @include sticky-fragment;
-      height: 64px;
-      padding: $layout-box-space-sm;
-      background-color: #001529;
+    .menu-wrapper {
+      height: 100vh;
+      overflow: auto;
 
-      .logo {
-        height: 100%;
-        background-color: #334454;
-        border-radius: $box-radius;
-        cursor: pointer;
+      .logo-wrapper {
+        @include sticky-fragment;
+        height: 64px;
+        padding: $layout-box-space-sm;
+        background-color: #001529;
+
+        .logo {
+          height: 100%;
+          background-color: #334454;
+          border-radius: $box-radius;
+          cursor: pointer;
+        }
       }
     }
   }
@@ -124,6 +128,10 @@ $background-color-light: #fafafa;
             font-size: 18px;
             width: $layout-box-space-md;
             height: $layout-box-space-md;
+
+            .ant-btn-icon {
+              margin-top: -2px;
+            }
           }
         }
 
@@ -267,4 +275,16 @@ $background-color-light: #fafafa;
   to {
     transform: rotate(360deg);
   }
+}
+// 面包屑相关
+.breadcrumb-item {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.45);
+}
+.breadcrumb-item-last {
+  color: rgba(0, 0, 0, 0.88);
+}
+.breadcrumb-item-Oblique {
+  margin: 0 8px;
+  user-select: none;
 }
