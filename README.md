@@ -1,6 +1,14 @@
 
-# Gettin![show1](https://github.com/ChenYu924/react-admin-template/assets/55083844/460bd3b0-ee04-424e-b947-f4f106315618)
-g Started with Create React App
+# 总体效果图
+[show1](https://github.com/ChenYu924/react-admin-template/assets/55083844/460bd3b0-ee04-424e-b947-f4f106315618)
+# 使用到的技术栈：React、react-router-dom、基于rtk和react-redux的redux、Ant Design UI框架。
+
+
+
+
+
+
+# Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
