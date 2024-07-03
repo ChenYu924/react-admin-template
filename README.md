@@ -1,6 +1,6 @@
 
 # 总体效果图
-[show1](https://github.com/ChenYu924/react-admin-template/assets/55083844/460bd3b0-ee04-424e-b947-f4f106315618)
+![1719993583112](https://github.com/ChenYu924/react-admin-template/assets/55083844/59a24de5-c614-4139-9e1a-87399585700a)
 
 # 使用到的技术栈：
 React、react-router-dom、基于rtk和react-redux的redux和Ant Design UI框架。
@@ -21,6 +21,9 @@ React、react-router-dom、基于rtk和react-redux的redux和Ant Design UI框架
 ## 4.禅模式
 隐藏侧边栏和头部显示
 ![1719993210154](https://github.com/ChenYu924/react-admin-template/assets/55083844/87273e72-ab75-4318-a53e-07ac725f3f39)
+## 5.路由页面过高时的返回顶部功能
+## 6.个人中心
+![1719993643039](https://github.com/ChenYu924/react-admin-template/assets/55083844/1771e29b-6cc6-4333-891d-ba8d3aff89b2)
 
 
 
