@@ -6,7 +6,7 @@
 React、react-router-dom、基于rtk和react-redux的redux和Ant Design UI框架。
 
 # 具体功能效果图
-## 1.可收缩的菜单栏
+## 1.可伸缩的菜单栏
 点击logo可回到首页并将菜单栏滚动条置顶
 ## 2.页签
 点击Menu项可新增页签，除首页外的页签都可以被关闭；页签条右侧有一键清除页签的icon。
