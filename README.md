@@ -18,9 +18,11 @@ React、react-router-dom、基于rtk和react-redux的redux和Ant Design UI框架
 ![1719992991755](https://github.com/ChenYu924/react-admin-template/assets/55083844/fbf60a3d-d0bd-48a6-b4bc-f220b0a4717a)
 ### 页签展示与否
 ![1719992908806](https://github.com/ChenYu924/react-admin-template/assets/55083844/8668733f-2a09-4272-922e-bf342ea8cf00)
-## 4.禅模式
+### 禅模式
 隐藏侧边栏和头部显示
 ![1719993210154](https://github.com/ChenYu924/react-admin-template/assets/55083844/87273e72-ab75-4318-a53e-07ac725f3f39)
+## 4.展示用的面包屑
+![1719993757080](https://github.com/ChenYu924/react-admin-template/assets/55083844/75d1709d-41fd-40d5-8ac2-243f52a09102)
 ## 5.路由页面过高时的返回顶部功能
 ## 6.个人中心
 ![1719993643039](https://github.com/ChenYu924/react-admin-template/assets/55083844/1771e29b-6cc6-4333-891d-ba8d3aff89b2)
