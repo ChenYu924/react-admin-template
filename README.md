@@ -7,17 +7,20 @@ React、react-router-dom、基于rtk和react-redux的redux和Ant Design UI框架
 
 # 具体功能效果图
 ## 1.可收缩和展开的菜单栏
+点击logo可回到首页并将菜单栏滚动条置顶
 ## 2.页签
 点击Menu项可新增页签，除首页外的页签都可以被关闭；页签条右侧有一键清除页签的icon。
 ![1719992431051](https://github.com/ChenYu924/react-admin-template/assets/55083844/b4b54985-48f2-46dd-adf8-bfd3b72566ca)
 ![1719992542412](https://github.com/ChenYu924/react-admin-template/assets/55083844/9de0fe52-b2d4-449f-92ab-dee0b53c268a)
 ## 3.设置icon功能：
+点击恢复默认按钮可恢复至默认设置
 ### 菜单手风琴模式的开关
 ![1719992991755](https://github.com/ChenYu924/react-admin-template/assets/55083844/fbf60a3d-d0bd-48a6-b4bc-f220b0a4717a)
 ### 页签展示与否
 ![1719992908806](https://github.com/ChenYu924/react-admin-template/assets/55083844/8668733f-2a09-4272-922e-bf342ea8cf00)
-
-
+## 4.禅模式
+隐藏侧边栏和头部显示
+![1719993210154](https://github.com/ChenYu924/react-admin-template/assets/55083844/87273e72-ab75-4318-a53e-07ac725f3f39)
 
 
 
