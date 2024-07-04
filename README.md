@@ -3,7 +3,7 @@
 ![1719993583112](https://github.com/ChenYu924/react-admin-template/assets/55083844/59a24de5-c614-4139-9e1a-87399585700a)
 
 # 使用到的技术栈：
-React、react-router-dom、基于rtk和react-redux的redux和Ant Design UI框架。
+React、react-router-dom、基于rtk的redux和Ant Design UI框架。
 
 # 具体功能效果图
 ## 1.可伸缩的菜单栏
