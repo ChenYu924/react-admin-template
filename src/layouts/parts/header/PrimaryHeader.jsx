@@ -9,6 +9,7 @@ import {
   BellOutlined,
   SettingOutlined,
 } from "@ant-design/icons";
+import "animate.css";
 import SettingPopover from "@/components/settingPopover/SettingPopover";
 
 function PrimaryHeader(props) {
@@ -67,8 +68,8 @@ function PrimaryHeader(props) {
           if (index === currentBreadcrumb.length - 1) {
             return (
               <span
-                key={index}
-                className="breadcrumb-item breadcrumb-item-last"
+                key={item}
+                className="breadcrumb-item breadcrumb-item-last animate__animated animate__fadeIn"
               >
                 {item}
               </span>
