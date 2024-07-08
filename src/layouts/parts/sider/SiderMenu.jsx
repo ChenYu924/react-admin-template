@@ -2,133 +2,14 @@ import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Menu } from "antd";
-import {
-  HomeOutlined,
-  TableOutlined,
-  CloseOutlined,
-  FormOutlined,
-  VerticalAlignTopOutlined,
-  AlignLeftOutlined,
-  DashOutlined,
-  LayoutOutlined,
-} from "@ant-design/icons";
+import menuIcon from "@/config/menuIcon";
 
 function SiderMenu(props) {
   const { openedKeys, menuAccordionOpen, setOpenedKeys } = props;
   // 侧边栏菜单项
-  const menuItems = [
-    {
-      key: "workbench",
-      label: "我的工作台",
-      icon: <HomeOutlined />,
-    },
-    {
-      key: "float-button-position",
-      label: "FloatButton 悬浮按钮",
-      icon: <VerticalAlignTopOutlined />,
-    },
-    {
-      key: "divider-show",
-      label: "Divider 分割线",
-      icon: <DashOutlined />,
-    },
-    {
-      key: "grid",
-      label: "Grid 栅格",
-      icon: <AlignLeftOutlined />,
-      children: [
-        {
-          key: "grid-basic",
-          label: "基础栅格",
-        },
-        {
-          key: "grid-gutter",
-          label: "区块间隔",
-        },
-        {
-          key: "grid-offset",
-          label: "左右偏移",
-        },
-        {
-          key: "grid-align",
-          label: "栅格对齐",
-        },
-      ],
-    },
-    {
-      key: "nav",
-      label: "布局相关",
-      icon: <LayoutOutlined />,
-      children: [
-        {
-          key: "anchor-show",
-          label: "Anchor 锚点",
-        },
-        {
-          key: "dropdown",
-          label: "下拉菜单",
-          children: [
-            {
-              key: "dropdown-basic",
-              label: "下拉菜单基本",
-            },
-          ],
-        },
-      ],
-    },
-    {
-      key: "form",
-      label: "Form 表单",
-      icon: <FormOutlined />,
-      children: [
-        {
-          key: "form-basic",
-          label: "表单基本用法",
-        },
-        {
-          key: "form-call",
-          label: "表单方法调用",
-        },
-        {
-          key: "form-layout",
-          label: "表单布局",
-        },
-        {
-          key: "form-layout-mixin",
-          label: "表单混合布局",
-        },
-        {
-          key: "form-required-mask",
-          label: "表单必选样式",
-        },
-      ],
-    },
-    {
-      key: "table",
-      label: "Table 表格",
-      icon: <TableOutlined />,
-      children: [
-        {
-          key: "table-basic",
-          label: "表格基本用法",
-        },
-        {
-          key: "table-row-select",
-          label: "表格选择",
-        },
-        {
-          key: "table-custom-select",
-          label: "表格自定义选择项",
-        },
-      ],
-    },
-    {
-      key: "closed",
-      label: "暂未开放",
-      icon: <CloseOutlined />,
-    },
-  ];
-  const levelKeys = getLevelKeys(menuItems);
+  const [menuItems, setMenuItems] = useState([]);
+  // 所有菜单项的层级
+  const [levelKeys, setLevelKeys] = useState({});
   const stateActiveKey = useSelector((state) => state.tab.activeKey);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -136,17 +17,7 @@ function SiderMenu(props) {
   const [selectedMenuItem, setSelectedMenuItem] = useState();
 
   useEffect(() => {
-    menuItemChange(menuItems[0].key);
-    const tab = {
-      key: menuItems[0].key,
-      label: menuItems[0].label,
-      closable: false,
-      path: [menuItems[0].label],
-    };
-    dispatch({
-      type: "tab-slice/setTab",
-      payload: tab,
-    });
+    fetchMenuItem();
   }, []);
   useEffect(() => {
     menuItemChange(stateActiveKey);
@@ -157,6 +28,156 @@ function SiderMenu(props) {
     }
   }, [menuAccordionOpen]);
 
+  // 通过接口获取菜单项的函数
+  function fetchMenuItem() {
+    /* !!!这里是模拟,实际使用时请替换成真实接口并将这段代码写入then中!!! */
+    // 获取到的菜单项数据结构
+    const result = [
+      {
+        key: "workbench",
+        label: "我的工作台",
+        menuIco: "home",
+      },
+      {
+        key: "float-button-position",
+        label: "FloatButton 悬浮按钮",
+        menuIco: "backTop",
+      },
+      {
+        key: "divider-show",
+        label: "Divider 分割线",
+        menuIco: "dash",
+      },
+      {
+        key: "grid",
+        label: "Grid 栅格",
+        menuIco: "alignLeft",
+        children: [
+          {
+            key: "grid-basic",
+            label: "基础栅格",
+          },
+          {
+            key: "grid-gutter",
+            label: "区块间隔",
+          },
+          {
+            key: "grid-offset",
+            label: "左右偏移",
+          },
+          {
+            key: "grid-align",
+            label: "栅格对齐",
+          },
+        ],
+      },
+      {
+        key: "nav",
+        label: "布局相关",
+        menuIco: "layout",
+        children: [
+          {
+            key: "anchor-show",
+            label: "Anchor 锚点",
+          },
+          {
+            key: "dropdown",
+            label: "下拉菜单",
+            children: [
+              {
+                key: "dropdown-basic",
+                label: "下拉菜单基本",
+              },
+            ],
+          },
+        ],
+      },
+      {
+        key: "form",
+        label: "Form 表单",
+        menuIco: "form",
+        children: [
+          {
+            key: "form-basic",
+            label: "表单基本用法",
+          },
+          {
+            key: "form-call",
+            label: "表单方法调用",
+          },
+          {
+            key: "form-layout",
+            label: "表单布局",
+          },
+          {
+            key: "form-layout-mixin",
+            label: "表单混合布局",
+          },
+          {
+            key: "form-required-mask",
+            label: "表单必选样式",
+          },
+        ],
+      },
+      {
+        key: "table",
+        label: "Table 表格",
+        menuIco: "table",
+        children: [
+          {
+            key: "table-basic",
+            label: "表格基本用法",
+          },
+          {
+            key: "table-row-select",
+            label: "表格选择",
+          },
+          {
+            key: "table-custom-select",
+            label: "表格自定义选择项",
+          },
+        ],
+      },
+      {
+        key: "closed",
+        label: "暂未开放",
+        menuIco: "closed",
+      },
+    ];
+    setMenuItems(renderMenuItems(result));
+    // 默认选中第一个菜单项
+    menuItemChange(result[0].key);
+    // 向tab切片添加第一个tab
+    const tab = {
+      key: result[0].key,
+      label: result[0].label,
+      closable: false,
+      path: [result[0].label],
+    };
+    dispatch({
+      type: "tab-slice/setTab",
+      payload: tab,
+    });
+    // 向menu切片添加所有菜单项
+    dispatch({ type: "menu-slice/setMenu", payload: result });
+    // 设置菜单项层级
+    setLevelKeys(getLevelKeys(result));
+  }
+  function renderMenuItems(result) {
+    const list = [];
+    result.forEach((item) => {
+      const { key, label, menuIco, children } = item;
+      const MenuIcon = menuIcon[menuIco];
+      const menuItem = {
+        key,
+        label,
+        icon: menuIco && MenuIcon && <MenuIcon />,
+        children,
+      };
+      list.push(menuItem);
+    });
+    return list;
+  }
   function getLevelKeys(items1) {
     const key = {};
     const func = (items2, level = 1) => {
