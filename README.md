@@ -1,8 +1,8 @@
 
 # 总体效果图
 ![LTDQG U9~ZT~O@WHHS5UQ28](https://github.com/ChenYu924/react-admin-template/assets/55083844/9abca816-ee90-4735-ab66-8044e3b2b18d)
-![image](https://github.com/ChenYu924/react-admin-template/assets/55083844/46dc5487-f98a-4ee3-8f2e-8e753cdd32f3)
 ![image](https://github.com/ChenYu924/react-admin-template/assets/55083844/26979008-b844-4048-b936-b7430e4075ac)
+![image](https://github.com/ChenYu924/react-admin-template/assets/55083844/46dc5487-f98a-4ee3-8f2e-8e753cdd32f3)
 
 # 使用到的技术栈：
 React、react-router-dom、基于rtk的redux和Ant Design UI框架。
