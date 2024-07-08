@@ -23,9 +23,6 @@ function RouteSearch() {
   useEffect(() => {
     inputValue ? setDropDownOpen(true) : setDropDownOpen(false);
   }, [inputValue]);
-  // useEffect(() => {
-  //   console.log("stateMenuData", stateMenuData);
-  // }, [stateMenuData])
 
   function handleSearchClick() {
     setInputVisibility(!inputVisibility);
