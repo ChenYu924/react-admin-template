@@ -11,6 +11,7 @@ import {
 } from "@ant-design/icons";
 import "animate.css";
 import SettingPopover from "@/components/settingPopover/SettingPopover";
+import RouteSearch from "@/components/routeSearch/RouteSearch";
 
 function PrimaryHeader(props) {
   const {
@@ -57,6 +58,7 @@ function PrimaryHeader(props) {
   return (
     <div className="wrapper">
       <div className="left">
+        {/* 菜单伸缩控制按钮 */}
         <Button
           style={{ marginRight: "16px" }}
           className="collapsed-button"
@@ -64,12 +66,13 @@ function PrimaryHeader(props) {
           icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
           onClick={() => setCollapsed(!collapsed)}
         />
+        {/* 展示用面包屑 */}
         {currentBreadcrumb.map((item, index) => {
           if (index === currentBreadcrumb.length - 1) {
             return (
               <span
                 key={item}
-                className="breadcrumb-item breadcrumb-item-last animate__animated animate__fadeIn"
+                className="breadcrumb-item breadcrumb-item-last animate__animated animate__fadeInRight"
               >
                 {item}
               </span>
@@ -85,6 +88,8 @@ function PrimaryHeader(props) {
         })}
       </div>
       <div className="right">
+        {/* 路由搜索 */}
+        <RouteSearch />
         {/* 消息中心 */}
         <Badge size="small" count={8}>
           <BellOutlined className="header-icon" />

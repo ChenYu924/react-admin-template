@@ -148,8 +148,25 @@ $background-color-light: #fafafa;
             }
           }
 
+          .search-wrapper {
+            display: flex;
+
+            .input-wrapper-hidden {
+              width: 0;
+              padding: 4px 0;
+              border-radius: 0;
+              border-bottom: 1px solid $border-color-base;
+              transition: all .4s;
+            }
+
+            .input-wrapper {
+              width: 200px;
+              margin-left: 8px;
+            }
+          }
+
           .setting-item {
-            @include flex-row-y-center;
+            display: flex;
           }
 
           .avatar-wrapper {
