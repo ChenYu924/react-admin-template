@@ -13,6 +13,11 @@ const menuSlice = createSlice({
         menuData: action.payload,
       };
     },
+    setClear() {
+      return {
+        menuData: [],
+      };
+    },
   },
 });
 

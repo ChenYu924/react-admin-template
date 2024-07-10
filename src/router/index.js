@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 
-import Login from "@/pages/login/Login";
+import LoginPage from "@/pages/login/LoginPage";
 // 通用布局
 import PrimaryLayout from "@/layouts/PrimaryLayout";
 // 引入通用布局的二级路由页面
@@ -21,6 +21,8 @@ import FormRequiredMask from "@/pages/form/FormRequiredMask";
 import TableBasic from "@/pages/table/TableBasic";
 import TableCustomSelect from "@/pages/table/TableCustomSelect";
 import TableRowSelect from "@/pages/table/TableRowSelect";
+import MineCenter from "@/pages/mine/MineCenter";
+import MineMessage from "@/pages/mine/MineMessage";
 
 // 404
 import Page404 from "@/pages/404";
@@ -28,7 +30,7 @@ import Page404 from "@/pages/404";
 const router = createBrowserRouter([
   {
     path: "/login",
-    element: <Login />,
+    element: <LoginPage />,
   },
   {
     path: "/",
@@ -101,6 +103,14 @@ const router = createBrowserRouter([
       {
         path: "/table-row-select",
         element: <TableRowSelect />,
+      },
+      {
+        path: "/mine-center",
+        element: <MineCenter />,
+      },
+      {
+        path: "/mine-message",
+        element: <MineMessage />,
       },
     ],
   },

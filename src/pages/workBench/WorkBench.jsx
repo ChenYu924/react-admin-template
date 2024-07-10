@@ -1,5 +1,5 @@
 function WorkBench() {
-  return <div>我的工作台</div>;
+  return <span>WorkBench</span>;
 }
 
 export default WorkBench;

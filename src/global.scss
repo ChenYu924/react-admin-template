@@ -76,7 +76,6 @@ $background-color-light: #fafafa;
 }
 
 /* 首页布局页PrimaryLayout.jsx相关 */
-// 首页布局页样式
 .primary-layout {
   min-width: 1000px;
 
@@ -156,7 +155,7 @@ $background-color-light: #fafafa;
               padding: 4px 0;
               border-radius: 0;
               border-bottom: 1px solid $border-color-base;
-              transition: all .4s;
+              transition: all 0.4s;
             }
 
             .input-wrapper {
@@ -253,6 +252,30 @@ $background-color-light: #fafafa;
         bottom: $layout-box-space-sm * 2 + 40px;
       }
     }
+  }
+}
+
+/* 登录布局页LoginLayout.jsx相关 */
+.login-layout {
+  height: 100vh;
+  min-width: 1350px;
+  min-height: 770px;
+  background-color: rgb(240, 245, 255);
+
+  .header {
+    background-color: rgba(255, 255, 255, 0);
+    padding: $layout-box-space-sm;
+
+    .logo {
+      height: 100%;
+      width: 300px;
+      background-color: #334454;
+      border-radius: $box-radius;
+    }
+  }
+
+  .content {
+    @include flex-center;
   }
 }
 

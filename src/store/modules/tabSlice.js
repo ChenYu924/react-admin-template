@@ -68,6 +68,12 @@ const tabSlice = createSlice({
         activeKey: action.payload,
       };
     },
+    setClear() {
+      return {
+        tabList: [],
+        activeKey: "",
+      };
+    },
   },
 });
 

@@ -139,6 +139,21 @@ function SiderMenu(props) {
         ],
       },
       {
+        key: "mine",
+        label: "个人页",
+        menuIco: "user",
+        children: [
+          {
+            key: "mine-center",
+            label: "个人中心",
+          },
+          {
+            key: "mine-message",
+            label: "消息中心",
+          },
+        ],
+      },
+      {
         key: "closed",
         label: "暂未开放",
         menuIco: "closed",
