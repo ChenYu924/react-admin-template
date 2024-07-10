@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import { Button, Avatar, Badge, Dropdown, Popover } from "antd";
 import {
   MenuFoldOutlined,
@@ -37,6 +38,8 @@ function PrimaryHeader(props) {
     },
   ];
   const stateTab = useSelector((state) => state.tab);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [popoverOpen, setPopoverOpen] = useState(false);
   const [currentBreadcrumb, setCurrentBreadcrumb] = useState([]);
 
@@ -48,11 +51,25 @@ function PrimaryHeader(props) {
     });
   }, [stateTab]);
 
+  function addTab(key, label) {
+    const tab = {
+      key,
+      label,
+      closable: true,
+      path: ["个人页", label],
+    };
+    dispatch({ type: "tab-slice/setTab", payload: tab });
+  }
+  function handleBell() {
+    addTab("mine-message", "消息中心");
+  }
   function handleNavProfile() {
-    console.log("nav to profile");
+    addTab("mine-center", "个人中心");
   }
   function handleNavLogin() {
-    console.log("nav to login");
+    dispatch({ type: "tab-slice/setClear" });
+    dispatch({ type: "menu-slice/setClear" });
+    navigate("/login");
   }
 
   return (
@@ -92,7 +109,7 @@ function PrimaryHeader(props) {
         <RouteSearch />
         {/* 消息中心 */}
         <Badge size="small" count={8}>
-          <BellOutlined className="header-icon" />
+          <BellOutlined className="header-icon" onClick={handleBell} />
         </Badge>
         {/* 设置 */}
         <Popover

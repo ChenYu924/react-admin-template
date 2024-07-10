@@ -1,0 +1,112 @@
+@use "../../global.scss" as global;
+
+// 登录盒高度和宽度
+$login-box-width: 1246px;
+$login-box-height: 600px;
+$login-box-shadow:
+  0 6px 20px 5px #bae7ff80,
+  0 16px 24px 2px #e6f7ff20;
+
+.loginBoxWrapper {
+  width: $login-box-width;
+  height: $login-box-height;
+  border-radius: global.$box-radius;
+  box-shadow: $login-box-shadow;
+  background-color: #fff;
+  @include global.flex-row-x-center;
+
+  .show {
+    flex-grow: 1;
+    position: relative;
+
+    .labelItemsWrapper {
+      width: 152px;
+      position: absolute;
+      left: 0;
+      bottom: 50px;
+
+      .labelItem {
+        height: 46px;
+        line-height: 46px;
+        text-align: center;
+        margin-bottom: global.$layout-box-space-sm;
+        cursor: pointer;
+        transition: all 0.2s;
+        user-select: none;
+
+        &:hover {
+          color: global.$primary-color;
+        }
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+
+      .labelItemActive {
+        background-color: global.$primary-color;
+        color: #fff;
+        pointer-events: none;
+      }
+    }
+
+    .showPic {
+      width: 664px;
+      height: 696px;
+      position: absolute;
+      left: 160px;
+      top: -48px;
+      z-index: 1;
+      border-radius: global.$box-radius;
+      box-shadow: $login-box-shadow;
+      animation: myFadeInLeft 0.5s ease-in-out;
+      background-color: global.$primary-color;
+    }
+
+    @keyframes myFadeInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+  }
+
+  .login {
+    width: 422px;
+    padding: 48px;
+
+    .title {
+      width: 220px;
+      height: 42px;
+      border-radius: global.$box-radius;
+      background-color: #334454;
+      margin: auto;
+    }
+
+    .subTitle {
+      width: 180px;
+      height: 25px;
+      background-color: #334454;
+      margin: 8px auto 40px auto;
+      border-radius: global.$box-radius;
+    }
+
+    :global {
+      .ant-tabs-nav::before {
+        border-bottom: none;
+      }
+    }
+  }
+}
+
+.formPasswordWrapper {
+  padding-top: 17px;
+
+  .site-form-item-icon {
+    margin-right: 4px;
+  }
+}

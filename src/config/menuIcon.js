@@ -7,6 +7,7 @@ import {
   AlignLeftOutlined,
   DashOutlined,
   LayoutOutlined,
+  UserOutlined,
 } from "@ant-design/icons";
 
 const menuIcon = {
@@ -18,6 +19,7 @@ const menuIcon = {
   form: FormOutlined,
   table: TableOutlined,
   closed: CloseOutlined,
+  user: UserOutlined,
 };
 
 export default menuIcon;
