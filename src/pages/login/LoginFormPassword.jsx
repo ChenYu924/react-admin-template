@@ -8,7 +8,7 @@ function LoginFormPassword() {
   const navigate = useNavigate();
 
   function handleLogin() {
-    form.validateFields().then((values) => {
+    form.validateFields().then(() => {
       navigate("/");
     });
   }
