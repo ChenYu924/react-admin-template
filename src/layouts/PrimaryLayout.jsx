@@ -58,6 +58,7 @@ function PrimaryLayout() {
         collapsed={collapsed}
       >
         <SiderMenu
+          collapsed={collapsed}
           openedKeys={openedKeys}
           menuAccordionOpen={menuAccordionOpen}
           setOpenedKeys={setOpenedKeys}

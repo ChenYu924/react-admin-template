@@ -5,7 +5,7 @@ import { Menu } from "antd";
 import menuIcon from "@/config/menuIcon";
 
 function SiderMenu(props) {
-  const { openedKeys, menuAccordionOpen, setOpenedKeys } = props;
+  const { collapsed, openedKeys, menuAccordionOpen, setOpenedKeys } = props;
   // 侧边栏菜单项
   const [menuItems, setMenuItems] = useState([]);
   // 所有菜单项的层级
@@ -20,6 +20,19 @@ function SiderMenu(props) {
     fetchMenuItem();
   }, []);
   useEffect(() => {
+    if (menuItems.length && !collapsed) {
+      if (menuAccordionOpen) {
+        setOpenedKeys(getAncestorsList(menuItems, stateActiveKey));
+      } else {
+        const allPath = [
+          ...openedKeys,
+          ...getAncestorsList(menuItems, stateActiveKey),
+        ];
+        // 清除allPath数组中的重复项
+        const newOpenedKeys = Array.from(new Set(allPath));
+        setOpenedKeys(newOpenedKeys);
+      }
+    }
     menuItemChange(stateActiveKey);
   }, [stateActiveKey]);
   useEffect(() => {
@@ -207,6 +220,24 @@ function SiderMenu(props) {
     };
     func(items1);
     return key;
+  }
+  function getAncestorsList(items, key) {
+    const keyPath = [];
+    // 根据菜单项key计算其所有的祖先元素,如key为dropdown-basic,需要输出['nav', 'dropdown']
+    function findAncestors(items, key) {
+      for (const item of items) {
+        if (item.key === key) {
+          return true;
+        }
+        if (item.children && findAncestors(item.children, key)) {
+          keyPath.unshift(item.key);
+          return true;
+        }
+      }
+      return false;
+    }
+    findAncestors(items, key);
+    return keyPath;
   }
   function menuItemChange(key) {
     setSelectedMenuItem(key);
