@@ -6,7 +6,7 @@ import classNames from "classnames";
 import { findPathsByKeyword, findLabelByKey } from "@/utils/tools";
 
 function RouteSearch() {
-  const stateMenuData = useSelector((state) => state.menu.menuData);
+  const stateMenuTree = useSelector((state) => state.user.menuTree);
   const dispatch = useDispatch();
   const [items, setItems] = useState([{}]);
   const inputRef = useRef(null);
@@ -30,7 +30,7 @@ function RouteSearch() {
   }
   function InputValueChange(e) {
     setInputValue(e.target.value);
-    setItems(findPathsByKeyword(stateMenuData, e.target.value));
+    setItems(findPathsByKeyword(stateMenuTree, e.target.value));
   }
   function InputFocus() {
     if (inputValue) {
@@ -38,7 +38,7 @@ function RouteSearch() {
     }
   }
   function handleDropdownBtn(e) {
-    const label = findLabelByKey(stateMenuData, e.key);
+    const label = findLabelByKey(stateMenuTree, e.key);
     const path = e.domEvent.target.innerText.split(" > ");
     const tab = { key: e.key, label, closable: true, path };
     dispatch({ type: "tab-slice/setTab", payload: tab });

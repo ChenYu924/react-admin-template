@@ -11,6 +11,7 @@ import {
   SettingOutlined,
 } from "@ant-design/icons";
 import "animate.css";
+import Cookies from "js-cookie";
 import SettingPopover from "@/components/settingPopover/SettingPopover";
 import RouteSearch from "@/components/routeSearch/RouteSearch";
 
@@ -67,8 +68,9 @@ function PrimaryHeader(props) {
     addTab("mine-center", "个人中心");
   }
   function handleNavLogin() {
+    Cookies.remove("token");
+    dispatch({ type: "user-slice/setClear" });
     dispatch({ type: "tab-slice/setClear" });
-    dispatch({ type: "menu-slice/setClear" });
     navigate("/login");
   }
 

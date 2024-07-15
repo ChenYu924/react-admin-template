@@ -6,19 +6,22 @@ import menuIcon from "@/config/menuIcon";
 
 function SiderMenu(props) {
   const { collapsed, openedKeys, menuAccordionOpen, setOpenedKeys } = props;
-  // 侧边栏菜单项
-  const [menuItems, setMenuItems] = useState([]);
-  // 所有菜单项的层级
-  const [levelKeys, setLevelKeys] = useState({});
+  // 仓库中的侧边栏菜单项(登录 -> 存入用户数据到user切片 - 从user切片获取菜单项数据)
+  const stateMenuTree = useSelector((state) => state.user.menuTree);
   const stateActiveKey = useSelector((state) => state.tab.activeKey);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const menuWrapperRef = useRef(null);
+  const [menuItems, setMenuItems] = useState([]);
+  // 所有菜单项的层级
+  const [levelKeys, setLevelKeys] = useState({});
   const [selectedMenuItem, setSelectedMenuItem] = useState();
 
   useEffect(() => {
-    fetchMenuItem();
-  }, []);
+    if (stateMenuTree.length) {
+      initMenu(stateMenuTree);
+    }
+  }, [stateMenuTree]);
   useEffect(() => {
     if (menuItems.length && !collapsed) {
       if (menuAccordionOpen) {
@@ -41,155 +44,24 @@ function SiderMenu(props) {
     }
   }, [menuAccordionOpen]);
 
-  // 通过接口获取菜单项的函数
-  function fetchMenuItem() {
-    /* !!!这里是模拟,实际使用时请替换成真实接口并将这段代码写入then中!!! */
-    // 获取到的菜单项数据结构
-    const result = [
-      {
-        key: "workbench",
-        label: "我的工作台",
-        menuIco: "home",
-      },
-      {
-        key: "float-button-position",
-        label: "FloatButton 悬浮按钮",
-        menuIco: "backTop",
-      },
-      {
-        key: "divider-show",
-        label: "Divider 分割线",
-        menuIco: "dash",
-      },
-      {
-        key: "grid",
-        label: "Grid 栅格",
-        menuIco: "alignLeft",
-        children: [
-          {
-            key: "grid-basic",
-            label: "基础栅格",
-          },
-          {
-            key: "grid-gutter",
-            label: "区块间隔",
-          },
-          {
-            key: "grid-offset",
-            label: "左右偏移",
-          },
-          {
-            key: "grid-align",
-            label: "栅格对齐",
-          },
-        ],
-      },
-      {
-        key: "nav",
-        label: "布局相关",
-        menuIco: "layout",
-        children: [
-          {
-            key: "anchor-show",
-            label: "Anchor 锚点",
-          },
-          {
-            key: "dropdown",
-            label: "下拉菜单",
-            children: [
-              {
-                key: "dropdown-basic",
-                label: "下拉菜单基本",
-              },
-            ],
-          },
-        ],
-      },
-      {
-        key: "form",
-        label: "Form 表单",
-        menuIco: "form",
-        children: [
-          {
-            key: "form-basic",
-            label: "表单基本用法",
-          },
-          {
-            key: "form-call",
-            label: "表单方法调用",
-          },
-          {
-            key: "form-layout",
-            label: "表单布局",
-          },
-          {
-            key: "form-layout-mixin",
-            label: "表单混合布局",
-          },
-          {
-            key: "form-required-mask",
-            label: "表单必选样式",
-          },
-        ],
-      },
-      {
-        key: "table",
-        label: "Table 表格",
-        menuIco: "table",
-        children: [
-          {
-            key: "table-basic",
-            label: "表格基本用法",
-          },
-          {
-            key: "table-row-select",
-            label: "表格选择",
-          },
-          {
-            key: "table-custom-select",
-            label: "表格自定义选择项",
-          },
-        ],
-      },
-      {
-        key: "mine",
-        label: "个人页",
-        menuIco: "user",
-        children: [
-          {
-            key: "mine-center",
-            label: "个人中心",
-          },
-          {
-            key: "mine-message",
-            label: "消息中心",
-          },
-        ],
-      },
-      {
-        key: "closed",
-        label: "暂未开放",
-        menuIco: "closed",
-      },
-    ];
-    setMenuItems(renderMenuItems(result));
+  // 初始化菜单
+  function initMenu(stateMenuTree) {
+    setMenuItems(renderMenuItems(stateMenuTree));
     // 默认选中第一个菜单项
-    menuItemChange(result[0].key);
+    menuItemChange(stateMenuTree[0].key);
     // 向tab切片添加第一个tab
     const tab = {
-      key: result[0].key,
-      label: result[0].label,
+      key: stateMenuTree[0].key,
+      label: stateMenuTree[0].label,
       closable: false,
-      path: [result[0].label],
+      path: [stateMenuTree[0].label],
     };
     dispatch({
       type: "tab-slice/setTab",
       payload: tab,
     });
-    // 向menu切片添加所有菜单项
-    dispatch({ type: "menu-slice/setMenu", payload: result });
     // 设置菜单项层级
-    setLevelKeys(getLevelKeys(result));
+    setLevelKeys(getLevelKeys(stateMenuTree));
   }
   function renderMenuItems(result) {
     const list = [];
