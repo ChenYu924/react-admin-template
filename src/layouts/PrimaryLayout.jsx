@@ -7,13 +7,6 @@ import SiderMenu from "@/layouts/parts/sider/SiderMenu";
 import PrimaryHeader from "@/layouts/parts/header/PrimaryHeader";
 import TabsBar from "@/layouts/parts/tabs/TabsBar";
 
-(function () {
-  const token = localStorage.getItem("token");
-  if (!token && window.location.pathname !== "/login") {
-    window.location.href = "/login";
-  }
-})();
-
 function PrimaryLayout() {
   const { Header, Sider, Content } = Layout;
   // 侧边菜单栏是否收起
