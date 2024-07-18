@@ -24,6 +24,8 @@ import TableRowSelect from "@/pages/table/TableRowSelect";
 import MineCenter from "@/pages/mine/MineCenter";
 import MineMessage from "@/pages/mine/MineMessage";
 
+// 403
+import Page403 from "@/pages/403";
 // 404
 import Page404 from "@/pages/404";
 
@@ -113,6 +115,10 @@ const router = createBrowserRouter([
         element: <MineMessage />,
       },
     ],
+  },
+  {
+    path: "/403",
+    element: <Page403 />,
   },
   {
     path: "*",
