@@ -38,3 +38,59 @@ export function findLabelByKey(items, key) {
   search(items);
   return label;
 }
+
+// 根据key查找其所有的祖先元素,如key为dropdown-basic,需要输出['nav', 'dropdown']
+export function getKeysListByKey(items, key) {
+  const keyPath = [];
+  function findAncestors(items, key) {
+    for (const item of items) {
+      if (item.key === key) {
+        return true;
+      }
+      if (item.children && findAncestors(item.children, key)) {
+        keyPath.unshift(item.key);
+        return true;
+      }
+    }
+    return false;
+  }
+  findAncestors(items, key);
+  return keyPath;
+}
+
+// 计算树形数据中每项的层级，返回一个对象，属性名为项的key，属性值为项的层级
+export function getLevelKeys(items1) {
+  const key = {};
+  const func = (items2, level = 1) => {
+    items2.forEach((item) => {
+      if (item.key) {
+        key[item.key] = level;
+      }
+      if (item.children) {
+        func(item.children, level + 1);
+      }
+    });
+  };
+  func(items1);
+  console.log("key", key);
+  return key;
+}
+
+// 根据keyPath查找对应的菜单项labelPath,如['nav', 'dropdown', 'dropdown-basic']，则返回["布局相关", "下拉菜单", "下拉菜单基础"]
+export function getBreadcrumbLabelList(menuItems, keyPath) {
+  const labelList = [];
+  const func = (items, key) => {
+    items.forEach((item) => {
+      if (item.key === key) {
+        labelList.push(item.label);
+      }
+      if (item.children) {
+        func(item.children, key);
+      }
+    });
+  };
+  keyPath.forEach((key) => {
+    func(menuItems, key);
+  });
+  return labelList;
+}

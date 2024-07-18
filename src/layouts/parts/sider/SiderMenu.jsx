@@ -3,6 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Menu } from "antd";
 import menuIcon from "@/config/menuIcon";
+import {
+  getLevelKeys,
+  getKeysListByKey,
+  getBreadcrumbLabelList,
+} from "@/utils/tools";
 
 function SiderMenu(props) {
   const { collapsed, openedKeys, menuAccordionOpen, setOpenedKeys } = props;
@@ -25,11 +30,11 @@ function SiderMenu(props) {
   useEffect(() => {
     if (menuItems.length && !collapsed) {
       if (menuAccordionOpen) {
-        setOpenedKeys(getAncestorsList(menuItems, stateActiveKey));
+        setOpenedKeys(getKeysListByKey(menuItems, stateActiveKey));
       } else {
         const allPath = [
           ...openedKeys,
-          ...getAncestorsList(menuItems, stateActiveKey),
+          ...getKeysListByKey(menuItems, stateActiveKey),
         ];
         // 清除allPath数组中的重复项
         const newOpenedKeys = Array.from(new Set(allPath));
@@ -78,59 +83,9 @@ function SiderMenu(props) {
     });
     return list;
   }
-  function getLevelKeys(items1) {
-    const key = {};
-    const func = (items2, level = 1) => {
-      items2.forEach((item) => {
-        if (item.key) {
-          key[item.key] = level;
-        }
-        if (item.children) {
-          func(item.children, level + 1);
-        }
-      });
-    };
-    func(items1);
-    return key;
-  }
-  function getAncestorsList(items, key) {
-    const keyPath = [];
-    // 根据菜单项key计算其所有的祖先元素,如key为dropdown-basic,需要输出['nav', 'dropdown']
-    function findAncestors(items, key) {
-      for (const item of items) {
-        if (item.key === key) {
-          return true;
-        }
-        if (item.children && findAncestors(item.children, key)) {
-          keyPath.unshift(item.key);
-          return true;
-        }
-      }
-      return false;
-    }
-    findAncestors(items, key);
-    return keyPath;
-  }
   function menuItemChange(key) {
     setSelectedMenuItem(key);
     navigate(`/${key}`);
-  }
-  function getBreadcrumbLabelList(keyPath) {
-    const labelList = [];
-    const func = (items, key) => {
-      items.forEach((item) => {
-        if (item.key === key) {
-          labelList.push(item.label);
-        }
-        if (item.children) {
-          func(item.children, key);
-        }
-      });
-    };
-    keyPath.forEach((key) => {
-      func(menuItems, key);
-    });
-    return labelList;
   }
   function handleLogoClick() {
     menuItemChange(menuItems[0].key);
@@ -138,7 +93,7 @@ function SiderMenu(props) {
     menuWrapperRef.current.scrollTop = 0;
   }
   function handleMenuItemClick({ key, keyPath, domEvent }) {
-    const path = getBreadcrumbLabelList(keyPath.reverse());
+    const path = getBreadcrumbLabelList(menuItems, keyPath.reverse());
     if (domEvent.target.innerText) {
       const tab = {
         key,
