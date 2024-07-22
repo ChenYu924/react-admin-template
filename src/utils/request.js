@@ -1,7 +1,6 @@
 import axios from "axios";
 import { message, notification } from "antd";
-import useToken from "@/hooks/useToken";
-
+import Cookies from "js-cookie";
 // 拦截器-获取响应后(axios全局配置)
 axios.interceptors.response.use(
   (response) => {
@@ -41,6 +40,7 @@ axios.interceptors.response.use(
 const service = axios.create({
   // 实际开发中baseURL应通过process.env进行配置
   // baseURL: process.env.REACT_APP_API_BASE_URL,
+  baseURL: "/api",
   timeout: 600000,
 });
 
@@ -48,9 +48,12 @@ const service = axios.create({
 service.interceptors.request.use(
   (config) => {
     let headers = {};
-    const token = useToken();
+    const token = Cookies.get("token");
     if (token) {
       headers.Authorization = `Bearer ${token}`;
+    } else {
+      message.error("token失效,请重新登录");
+      window.location.href = "/login";
     }
     config.headers = { ...config.headers, ...headers };
     return config;

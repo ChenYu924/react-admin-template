@@ -8,6 +8,7 @@ import {
   DashOutlined,
   LayoutOutlined,
   UserOutlined,
+  PicLeftOutlined,
 } from "@ant-design/icons";
 
 const menuIcon = {
@@ -20,6 +21,7 @@ const menuIcon = {
   table: TableOutlined,
   closed: CloseOutlined,
   user: UserOutlined,
+  template: PicLeftOutlined,
 };
 
 export default menuIcon;

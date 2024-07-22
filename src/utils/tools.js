@@ -72,7 +72,6 @@ export function getLevelKeys(items1) {
     });
   };
   func(items1);
-  console.log("key", key);
   return key;
 }
 

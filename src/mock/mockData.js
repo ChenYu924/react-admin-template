@@ -1,6 +1,4 @@
-export const userToken = {
-  token: "ec24e170-a7fc-4956-b5fb-4d576fe1234a",
-};
+export const token = "ec24e170-a7fc-4956-b5fb-4d576fe1234a";
 
 export const userData = {
   id: 1,
@@ -20,9 +18,15 @@ export const userData = {
       menuIco: "backTop",
     },
     {
-      key: "divider-show",
-      label: "Divider 分割线",
-      menuIco: "dash",
+      key: "common-template",
+      label: "通用模板",
+      menuIco: "template",
+      children: [
+        {
+          key: "with-steps1",
+          label: "带步骤条1",
+        },
+      ],
     },
     {
       key: "grid",
@@ -147,9 +151,15 @@ export const userData = {
       menuIco: "backTop",
     },
     {
-      key: "divider-show",
-      label: "Divider 分割线",
-      menuIco: "dash",
+      key: "common-template",
+      label: "通用模板",
+      menuIco: "template",
+      children: [
+        {
+          key: "with-steps1",
+          label: "带步骤条1",
+        },
+      ],
     },
     {
       key: "grid",
@@ -267,7 +277,7 @@ export const userData = {
   menuList: [
     "/workbench",
     "/float-button-position",
-    "/divider-show",
+    "/with-steps1",
     "/grid-basic",
     "/grid-gutter",
     "/grid-offset",
@@ -289,7 +299,7 @@ export const userData = {
   menuListAll: [
     "/workbench",
     "/float-button-position",
-    "/divider-show",
+    "/with-steps1",
     "/grid-basic",
     "/grid-gutter",
     "/grid-offset",
