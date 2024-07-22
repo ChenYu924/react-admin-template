@@ -51,6 +51,7 @@ function SiderMenu(props) {
 
   // 初始化菜单
   function initMenu(stateMenuTree) {
+    console.log('初始化了')
     setMenuItems(renderMenuItems(stateMenuTree));
     // 默认选中第一个菜单项
     menuItemChange(stateMenuTree[0].key);

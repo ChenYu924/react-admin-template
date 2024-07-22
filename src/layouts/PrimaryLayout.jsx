@@ -1,14 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { Outlet } from "react-router-dom";
 import { Layout, FloatButton } from "antd";
 import { ShrinkOutlined } from "@ant-design/icons";
 import classNames from "classnames";
+import request from "@/utils/request";
 import SiderMenu from "@/layouts/parts/sider/SiderMenu";
 import PrimaryHeader from "@/layouts/parts/header/PrimaryHeader";
 import TabsBar from "@/layouts/parts/tabs/TabsBar";
 
 function PrimaryLayout() {
   const { Header, Sider, Content } = Layout;
+  const dispatch = useDispatch();
   // 侧边菜单栏是否收起
   const [collapsed, setCollapsed] = useState(false);
   // 当前展开的sub菜单项
@@ -19,6 +22,14 @@ function PrimaryLayout() {
   const [tabsBarShow, setTabsBarShow] = useState(true);
   // 是否开启禅模式
   const [zenModeOpen, setZenModeOpen] = useState(false);
+
+  useEffect(() => {
+    // 根据获取到的token再去接口中获取用户信息
+    request.get("/user").then((res) => {
+      const userData = res.data.data;
+      dispatch({ type: "user-slice/setUser", payload: userData });
+    });
+  }, []);
 
   function judgeSiderWidth() {
     return zenModeOpen ? 0 : 288;

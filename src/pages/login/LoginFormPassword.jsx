@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, message } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import styles from "./login.module.scss";
-// 引入模拟数据
-import { userToken, userData } from "@/mock/mockData";
+import axios from "axios";
 
 function LoginFormPassword() {
   const [form] = Form.useForm();
@@ -22,14 +21,26 @@ function LoginFormPassword() {
   }, []);
 
   function handleLogin() {
-    form.validateFields().then((value) => {
-      // 模拟：将value对象带入接口中获取token
-      dispatch({ type: "user-slice/setToken", payload: userToken.token });
-      // 模拟：根据获取到的token再去接口中获取用户信息
-      dispatch({ type: "user-slice/setUser", payload: userData });
-      // 跳转至首页
-      navigate("/");
-    });
+    form
+      .validateFields()
+      .then((value) => {
+        // 根据账户和密码获取token
+        axios.post("/api/login", value).then((res) => {
+          if (res.data.code === 200) {
+            const userToken = res.data.data;
+            dispatch({ type: "user-slice/setToken", payload: userToken });
+            // 跳转至首页
+            navigate("/");
+          } else if (res.data.code === 401) {
+            message.error("用户名或密码错误");
+          } else {
+            message.error("登录失败");
+          }
+        });
+      })
+      .catch((err) => {
+        message.error("请检查网络连接", err);
+      });
   }
 
   return (

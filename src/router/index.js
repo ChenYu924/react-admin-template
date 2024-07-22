@@ -6,7 +6,7 @@ import PrimaryLayout from "@/layouts/PrimaryLayout";
 // 引入通用布局的二级路由页面
 import WorkBench from "@/pages/workBench/WorkBench";
 import FloatButtonPosition from "@/pages/button/FloatButtonPosition";
-import DividerShow from "@/pages/divider/DividerShow";
+import WithSteps1 from "@/pages/commonTemplate/WithSteps1";
 import GridBasic from "@/pages/grid/GridBasic";
 import GridGutter from "@/pages/grid/GridGutter";
 import GridOffset from "@/pages/grid/GridOffset";
@@ -47,8 +47,8 @@ const router = createBrowserRouter([
         element: <FloatButtonPosition />,
       },
       {
-        path: "/divider-show",
-        element: <DividerShow />,
+        path: "/with-steps1",
+        element: <WithSteps1 />,
       },
       {
         path: "/grid-basic",
