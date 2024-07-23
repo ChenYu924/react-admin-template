@@ -12,21 +12,11 @@ import {
 } from "@ant-design/icons";
 import "animate.css";
 import Cookies from "js-cookie";
+import usePrimaryLayoutContext from "@/hooks/usePrimaryLayoutContext";
 import SettingPopover from "@/components/settingPopover/SettingPopover";
 import RouteSearch from "@/components/routeSearch/RouteSearch";
 
-function PrimaryHeader(props) {
-  const {
-    collapsed,
-    menuAccordionOpen,
-    tabsBarShow,
-    zenModeOpen,
-    setCollapsed,
-    setMenuAccordionOpen,
-    setTabsBarShow,
-    setZenModeOpen,
-    onResetSettingOptions,
-  } = props;
+function PrimaryHeader() {
   const dropdownItems = [
     {
       key: "profile",
@@ -38,6 +28,7 @@ function PrimaryHeader(props) {
       danger: true,
     },
   ];
+  const { collapsed, setCollapsed } = usePrimaryLayoutContext();
   const stateTab = useSelector((state) => state.tab);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -115,19 +106,7 @@ function PrimaryHeader(props) {
         </Badge>
         {/* 设置 */}
         <Popover
-          content={
-            <SettingPopover
-              collapsed={collapsed}
-              menuAccordionOpen={menuAccordionOpen}
-              tabsBarShow={tabsBarShow}
-              zenModeOpen={zenModeOpen}
-              setMenuAccordionOpen={setMenuAccordionOpen}
-              setTabsBarShow={setTabsBarShow}
-              setZenModeOpen={setZenModeOpen}
-              setPopoverOpen={setPopoverOpen}
-              onResetSettingOptions={onResetSettingOptions}
-            />
-          }
+          content={<SettingPopover />}
           title="设置"
           trigger="click"
           open={popoverOpen}
