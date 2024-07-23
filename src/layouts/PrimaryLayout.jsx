@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Outlet } from "react-router-dom";
 import { Layout, FloatButton } from "antd";
@@ -8,6 +8,9 @@ import request from "@/utils/request";
 import SiderMenu from "@/layouts/parts/sider/SiderMenu";
 import PrimaryHeader from "@/layouts/parts/header/PrimaryHeader";
 import TabsBar from "@/layouts/parts/tabs/TabsBar";
+
+// 上下文对象
+export const PrimaryLayoutContext = createContext(null);
 
 function PrimaryLayout() {
   const { Header, Sider, Content } = Layout;
@@ -60,51 +63,52 @@ function PrimaryLayout() {
   }
 
   return (
-    <Layout className="primary-layout">
-      <Sider
-        width={judgeSiderWidth()}
-        className={getSiderClassNames()}
-        trigger={null}
-        collapsible
-        collapsed={collapsed}
-      >
-        <SiderMenu
+    <PrimaryLayoutContext.Provider
+      value={{
+        collapsed,
+        setCollapsed,
+        openedKeys,
+        setOpenedKeys,
+        menuAccordionOpen,
+        setMenuAccordionOpen,
+        tabsBarShow,
+        setTabsBarShow,
+        zenModeOpen,
+        setZenModeOpen,
+        onResetSettingOptions: handleResetSettingOptions,
+      }}
+    >
+      <Layout className="primary-layout">
+        <Sider
+          width={judgeSiderWidth()}
+          className={getSiderClassNames()}
+          trigger={null}
+          collapsible
           collapsed={collapsed}
-          openedKeys={openedKeys}
-          menuAccordionOpen={menuAccordionOpen}
-          setOpenedKeys={setOpenedKeys}
-        />
-      </Sider>
-      <Layout className="main">
-        <Header className={getHeaderClassNames()}>
-          <PrimaryHeader
-            collapsed={collapsed}
-            menuAccordionOpen={menuAccordionOpen}
-            tabsBarShow={tabsBarShow}
-            zenModeOpen={zenModeOpen}
-            setCollapsed={setCollapsed}
-            setMenuAccordionOpen={setMenuAccordionOpen}
-            setTabsBarShow={setTabsBarShow}
-            setZenModeOpen={setZenModeOpen}
-            onResetSettingOptions={handleResetSettingOptions}
-          />
-        </Header>
-        {tabsBarShow && <TabsBar setOpenedKeys={setOpenedKeys} />}
-        <Content className={getContentClassNames()}>
-          <Outlet />
-          <FloatButton.BackTop className="back-top-position" />
-          {zenModeOpen && (
-            <FloatButton
-              className="quit-zen"
-              type="primary"
-              icon={<ShrinkOutlined />}
-              tooltip="退出禅模式"
-              onClick={() => setZenModeOpen(false)}
-            />
-          )}
-        </Content>
+        >
+          <SiderMenu />
+        </Sider>
+        <Layout className="main">
+          <Header className={getHeaderClassNames()}>
+            <PrimaryHeader />
+          </Header>
+          {tabsBarShow && <TabsBar />}
+          <Content className={getContentClassNames()}>
+            <Outlet />
+            <FloatButton.BackTop className="back-top-position" />
+            {zenModeOpen && (
+              <FloatButton
+                className="quit-zen"
+                type="primary"
+                icon={<ShrinkOutlined />}
+                tooltip="退出禅模式"
+                onClick={() => setZenModeOpen(false)}
+              />
+            )}
+          </Content>
+        </Layout>
       </Layout>
-    </Layout>
+    </PrimaryLayoutContext.Provider>
   );
 }
 

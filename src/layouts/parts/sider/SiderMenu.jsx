@@ -3,14 +3,16 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Menu } from "antd";
 import menuIcon from "@/config/menuIcon";
+import usePrimaryLayoutContext from "@/hooks/usePrimaryLayoutContext";
 import {
   getLevelKeys,
   getKeysListByKey,
   getBreadcrumbLabelList,
 } from "@/utils/tools";
 
-function SiderMenu(props) {
-  const { collapsed, openedKeys, menuAccordionOpen, setOpenedKeys } = props;
+function SiderMenu() {
+  const { collapsed, openedKeys, menuAccordionOpen, setOpenedKeys } =
+    usePrimaryLayoutContext();
   // 仓库中的侧边栏菜单项(登录 -> 存入用户数据到user切片 - 从user切片获取菜单项数据)
   const stateMenuTree = useSelector((state) => state.user.menuTree);
   const stateActiveKey = useSelector((state) => state.tab.activeKey);
@@ -51,7 +53,7 @@ function SiderMenu(props) {
 
   // 初始化菜单
   function initMenu(stateMenuTree) {
-    console.log('初始化了')
+    console.log("初始化了");
     setMenuItems(renderMenuItems(stateMenuTree));
     // 默认选中第一个菜单项
     menuItemChange(stateMenuTree[0].key);

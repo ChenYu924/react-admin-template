@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Tabs, Modal } from "antd";
 import { ClearOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
+import usePrimaryLayoutContext from "@/hooks/usePrimaryLayoutContext";
 
-function TabsBar(props) {
-  const { setOpenedKeys } = props;
+function TabsBar() {
+  const { setOpenedKeys } = usePrimaryLayoutContext();
   const tabData = useSelector((state) => state.tab);
   const dispatch = useDispatch();
   const [activeKey, setActiveKey] = useState();

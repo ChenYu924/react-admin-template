@@ -1,14 +1,15 @@
+import { useState } from "react";
 import { Divider, Switch, message } from "antd";
 import { RedoOutlined } from "@ant-design/icons";
 import styles from "./SettingPopover.module.scss";
 import classNames from "classnames";
-import { useState } from "react";
+import usePrimaryLayoutContext from "@/hooks/usePrimaryLayoutContext";
 
 /*
   PrimaryLayout -> PrimaryHeader -> 点击设置按钮后Popover内的内容:
     页签开关、禅模式开关、恢复默认按钮等
 */
-function SettingPopover(props) {
+function SettingPopover() {
   const {
     collapsed,
     menuAccordionOpen,
@@ -19,7 +20,7 @@ function SettingPopover(props) {
     setZenModeOpen,
     setPopoverOpen,
     onResetSettingOptions,
-  } = props;
+  } = usePrimaryLayoutContext();
   const [isRotate, setIsRotate] = useState(false);
 
   function handleReset() {
