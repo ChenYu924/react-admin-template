@@ -13,6 +13,7 @@ import {
 import "animate.css";
 import Cookies from "js-cookie";
 import usePrimaryLayoutContext from "@/hooks/usePrimaryLayoutContext";
+import HeaderBreadcrumb from "@/layouts/parts/header/HeaderBreadcrumb";
 import SettingPopover from "@/components/settingPopover/SettingPopover";
 import RouteSearch from "@/components/routeSearch/RouteSearch";
 
@@ -29,6 +30,7 @@ function PrimaryHeader() {
     },
   ];
   const { collapsed, setCollapsed } = usePrimaryLayoutContext();
+  const stateUserInfo = useSelector((state) => state.user.info);
   const stateTab = useSelector((state) => state.tab);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -77,25 +79,7 @@ function PrimaryHeader() {
           onClick={() => setCollapsed(!collapsed)}
         />
         {/* 展示用面包屑 */}
-        {currentBreadcrumb.map((item, index) => {
-          if (index === currentBreadcrumb.length - 1) {
-            return (
-              <span
-                key={item}
-                className="breadcrumb-item breadcrumb-item-last animate__animated animate__fadeInRight"
-              >
-                {item}
-              </span>
-            );
-          } else {
-            return (
-              <span key={index} className="breadcrumb-item">
-                {item}
-                <span className="breadcrumb-item-Oblique">/</span>
-              </span>
-            );
-          }
-        })}
+        <HeaderBreadcrumb currentBreadcrumb={currentBreadcrumb} />
       </div>
       <div className="right">
         {/* 路由搜索 */}
@@ -120,7 +104,7 @@ function PrimaryHeader() {
         {/* 个人信息 */}
         <Dropdown menu={{ items: dropdownItems }}>
           <div className="avatar-wrapper">
-            <span className="user-name">管理员</span>
+            <span className="user-name">{stateUserInfo.nickname}</span>
             <UpOutlined className="arrow" />
             <Avatar size={40} icon={<UserOutlined />} className="avatar" />
           </div>
