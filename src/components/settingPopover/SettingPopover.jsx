@@ -9,7 +9,7 @@ import usePrimaryLayoutContext from "@/hooks/usePrimaryLayoutContext";
   PrimaryLayout -> PrimaryHeader -> 点击设置按钮后Popover内的内容:
     页签开关、禅模式开关、恢复默认按钮等
 */
-function SettingPopover() {
+function SettingPopover({ setPopoverOpen }) {
   const {
     collapsed,
     menuAccordionOpen,
@@ -18,7 +18,6 @@ function SettingPopover() {
     setMenuAccordionOpen,
     setTabsBarShow,
     setZenModeOpen,
-    setPopoverOpen,
     onResetSettingOptions,
   } = usePrimaryLayoutContext();
   const [isRotate, setIsRotate] = useState(false);
