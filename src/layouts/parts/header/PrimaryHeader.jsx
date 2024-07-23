@@ -90,7 +90,7 @@ function PrimaryHeader() {
         </Badge>
         {/* 设置 */}
         <Popover
-          content={<SettingPopover />}
+          content={<SettingPopover setPopoverOpen={setPopoverOpen} />}
           title="设置"
           trigger="click"
           open={popoverOpen}

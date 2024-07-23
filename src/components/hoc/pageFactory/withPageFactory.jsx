@@ -5,12 +5,11 @@ const PageContext = createContext(null);
 
 function withPageFactory({ fetchUrl, fetchParam }) {
   return (WrappedComponent) => {
-    return function PageContainer(props) {
-      console.log("props", props);
+    return function PageContainer() {
+      const [form] = Form.useForm();
       const [url, setUrl] = useState(fetchUrl);
       const [param, setParam] = useState(fetchParam);
       const [tableData, setTableData] = useState([]);
-      const [form] = Form.useForm();
 
       useEffect(() => {
         fetchTableData();
