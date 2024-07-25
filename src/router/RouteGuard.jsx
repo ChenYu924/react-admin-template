@@ -1,9 +1,12 @@
 import { useSelector } from "react-redux";
 import useToken from "@/hooks/useToken";
+import { isDevelopment } from "@/utils/check";
+import MgrType from "@/const/MgrType";
 
 // 路由守卫
 function RouteGuard({ children }) {
   const token = useToken();
+  const stateMgrType = useSelector((state) => state.user.mgrType);
   const stateMenuListAll = useSelector((state) => state.user.menuListAll);
   const stateMenuList = useSelector((state) => state.user.menuList);
   const currentPath = window.location.pathname;
@@ -12,6 +15,10 @@ function RouteGuard({ children }) {
   function hasPermission() {
     const inMenuAll = stateMenuListAll.includes(currentPath);
     const inUserMenu = stateMenuList.includes(currentPath);
+
+    if (isDevelopment() && stateMgrType === MgrType.SUPER_ADMIN) {
+      return true;
+    }
 
     // 在全局菜单中但不在用户菜单中
     if (inMenuAll && !inUserMenu) {

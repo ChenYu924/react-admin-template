@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Input, Dropdown } from "antd";
 import { FileSearchOutlined } from "@ant-design/icons";
 import classNames from "classnames";
-import { findPathsByKeyword, findLabelByKey } from "@/utils/tools";
+import { findPathsByKeyword, findLabelByKey } from "@/utils/menuCalc";
 
 function RouteSearch() {
   const stateMenuTree = useSelector((state) => state.user.menuTree);

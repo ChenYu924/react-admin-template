@@ -4,6 +4,8 @@ import Cookies from "js-cookie";
 const init = {
   id: JSON.parse(localStorage.getItem("id")) || "",
   info: JSON.parse(localStorage.getItem("info")) || {},
+  userType: JSON.parse(localStorage.getItem("userType")) || "",
+  mgrType: JSON.parse(localStorage.getItem("mgrType")) || "",
   // 菜单树
   menuTree: JSON.parse(localStorage.getItem("menuTree")) || [],
   menuTreeAll: JSON.parse(localStorage.getItem("menuTreeAll")) || [],
@@ -21,6 +23,8 @@ const userSlice = createSlice({
     setUser(state, { payload }) {
       localStorage.setItem("id", JSON.stringify(payload.id));
       localStorage.setItem("info", JSON.stringify(payload.info));
+      localStorage.setItem("userType", JSON.stringify(payload.userType));
+      localStorage.setItem("mgrType", JSON.stringify(payload.mgrType));
       localStorage.setItem("menuTree", JSON.stringify(payload.menuTree));
       localStorage.setItem("menuTreeAll", JSON.stringify(payload.menuTreeAll));
       localStorage.setItem("menuList", JSON.stringify(payload.menuList));
