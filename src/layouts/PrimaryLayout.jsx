@@ -32,7 +32,7 @@ function PrimaryLayout() {
       const userData = res.data.data;
       dispatch({ type: "user-slice/setUser", payload: userData });
     });
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   function judgeSiderWidth() {
     return zenModeOpen ? 0 : 288;

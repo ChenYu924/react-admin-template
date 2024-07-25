@@ -6,6 +6,8 @@ export const userData = {
     username: "admin",
     nickname: "管理员",
   },
+  userType: "1",
+  mgrType: "9",
   menuTree: [
     {
       key: "workbench",

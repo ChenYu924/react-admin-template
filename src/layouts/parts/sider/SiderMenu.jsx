@@ -8,7 +8,7 @@ import {
   getLevelKeys,
   getKeysListByKey,
   getBreadcrumbLabelList,
-} from "@/utils/tools";
+} from "@/utils/menuCalc";
 
 function SiderMenu() {
   const { collapsed, openedKeys, menuAccordionOpen, setOpenedKeys } =
