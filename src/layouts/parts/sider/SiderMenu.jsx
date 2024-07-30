@@ -28,7 +28,7 @@ function SiderMenu() {
     if (stateMenuTree.length) {
       initMenu(stateMenuTree);
     }
-  }, [stateMenuTree]);
+  }, [stateMenuTree]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (menuItems.length && !collapsed) {
       if (menuAccordionOpen) {
@@ -44,12 +44,12 @@ function SiderMenu() {
       }
     }
     menuItemChange(stateActiveKey);
-  }, [stateActiveKey]);
+  }, [stateActiveKey]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (menuAccordionOpen) {
       setOpenedKeys([]);
     }
-  }, [menuAccordionOpen]);
+  }, [menuAccordionOpen]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // 初始化菜单
   function initMenu(stateMenuTree) {
@@ -92,7 +92,10 @@ function SiderMenu() {
   function handleLogoClick() {
     menuItemChange(menuItems[0].key);
     dispatch({ type: "tab-slice/setActiveKey", payload: menuItems[0].key });
-    menuWrapperRef.current.scrollTop = 0;
+    menuWrapperRef.current.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   }
   function handleMenuItemClick({ key, keyPath, domEvent }) {
     const path = getBreadcrumbLabelList(menuItems, keyPath.reverse());
