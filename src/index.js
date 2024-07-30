@@ -7,6 +7,7 @@ import "./global.scss";
 import { ConfigProvider } from "antd";
 import zhCN from "antd/locale/zh_CN";
 import "dayjs/locale/zh-cn";
+import antdTheme from '@/config/antdTheme';
 // 引入redux
 import store from "./store";
 import { Provider } from "react-redux";
@@ -15,7 +16,7 @@ import "./mock";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <ConfigProvider locale={zhCN}>
+  <ConfigProvider locale={zhCN} theme={antdTheme}>
     <Provider store={store}>
       <App />
     </Provider>
