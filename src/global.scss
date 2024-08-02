@@ -4,6 +4,7 @@ $layout-box-space-md: 32px;
 $layout-box-bgc: #fff;
 $box-radius: 8px;
 $icon-opacity-num: 0.7;
+$placeholder-box-color: #334454;
 
 /* 全局样式变量 */
 $placeholder-box-height-xs: 8px;
@@ -95,7 +96,7 @@ $background-color-light: #fafafa;
 
         .logo {
           height: 100%;
-          background-color: #334454;
+          background-color: $placeholder-box-color;
           border-radius: $box-radius;
           cursor: pointer;
         }
@@ -269,7 +270,7 @@ $background-color-light: #fafafa;
     .logo {
       height: 100%;
       width: 300px;
-      background-color: #334454;
+      background-color: $placeholder-box-color;
       border-radius: $box-radius;
     }
   }

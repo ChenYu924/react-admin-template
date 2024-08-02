@@ -1,5 +1,6 @@
 export const token = "ec24e170-a7fc-4956-b5fb-4d576fe1234a";
 
+// 用户数据
 export const userData = {
   id: 1,
   info: {
@@ -323,3 +324,31 @@ export const userData = {
     "/test2",
   ],
 };
+
+// 我的工作台-头部导航盒数据
+export const workbenchNavBoxData = [
+  {
+    key: "001",
+    title: "未读消息",
+    desc: "共有101条未读消息",
+    count: 101,
+  },
+  {
+    key: "002",
+    title: "待办事项",
+    desc: "共有8个待办事项",
+    count: 8,
+  },
+  {
+    key: "003",
+    title: "我的日程",
+    desc: "共有5个日程安排",
+    count: 5,
+  },
+  {
+    key: "004",
+    title: "我的项目",
+    desc: "描述文本",
+    count: 0,
+  },
+];
