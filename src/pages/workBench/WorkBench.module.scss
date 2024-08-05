@@ -1,61 +1,83 @@
 @use "@/global.scss" as global;
 
-.nav-box-wrapper {
+.container {
+  height: 100%;
   display: flex;
+  flex-direction: column;
   gap: global.$layout-box-space-sm;
 
-  .nav-box {
-    flex: 1;
-    width: 320px;
-    padding: global.$layout-box-space-sm;
-    border: 1px solid #f0f0f0;
-    border-radius: global.$box-radius;
+  .header {
     display: flex;
-    cursor: pointer;
-    transition: all 0.3s;
+    gap: global.$layout-box-space-sm;
 
-    &:hover {
-      background-color: rgb(248, 251, 255);
-    }
-
-    .icon {
-      width: 65px;
-      height: 65px;
-      background-color: rgb(225, 237, 255);
+    .nav-box {
+      flex: 1;
+      width: 320px;
+      padding: global.$layout-box-space-sm;
+      border: 1px solid #f0f0f0;
       border-radius: global.$box-radius;
-    }
-
-    .content {
-      height: 65px;
-      margin-left: global.$layout-box-space-sm;
       display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 5px 0;
-      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.3s;
 
-      .title {
-        color: rgb(85, 85, 85);
-        font-size: 16px;
+      &:hover {
+        background-color: rgb(248, 251, 255);
       }
 
-      .desc {
-        color: rgb(153, 153, 153);
-        font-size: 15px;
+      .icon {
+        width: 65px;
+        height: 65px;
+        background-color: rgb(225, 237, 255);
+        border-radius: global.$box-radius;
+      }
+
+      .content {
+        height: 65px;
+        margin-left: global.$layout-box-space-sm;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        padding: 5px 0;
+        overflow: hidden;
+
+        .title {
+          color: rgb(85, 85, 85);
+          font-size: 16px;
+        }
+
+        .desc {
+          color: rgb(153, 153, 153);
+          font-size: 15px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+        }
       }
     }
   }
-}
 
-.middle {
-  display: flex;
-  margin-top: global.$layout-box-space-sm;
+  .middle {
+    display: flex;
 
-  .smooth-curve-chart, .bar-chart {
-    width: 50%;
-    height: 380px;
+    .smooth-curve-chart,
+    .bar-chart {
+      width: 50%;
+      height: 400px;
+    }
+  }
+
+  .footer {
+    height: 400px;
+    display: flex;
+
+    .rose-chart,
+    .radar-chart {
+      width: 30%;
+      height: 100%;
+    }
+
+    .radar-chart {
+      margin-left: global.$layout-box-space-sm;
+    }
   }
 }
