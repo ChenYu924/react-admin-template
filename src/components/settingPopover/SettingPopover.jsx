@@ -12,9 +12,11 @@ import usePrimaryLayoutContext from "@/hooks/usePrimaryLayoutContext";
 function SettingPopover({ setPopoverOpen }) {
   const {
     collapsed,
+    menuDark,
     menuAccordionOpen,
     tabsBarShow,
     zenModeOpen,
+    setMenuDark,
     setMenuAccordionOpen,
     setTabsBarShow,
     setZenModeOpen,
@@ -22,6 +24,17 @@ function SettingPopover({ setPopoverOpen }) {
   } = usePrimaryLayoutContext();
   const [isRotate, setIsRotate] = useState(false);
 
+  function settingItemJSX(label, checked, setMethod) {
+    return (
+      <>
+        <div className={styles.settingItem}>
+          <div className={styles.settingItemLabel}>{label}：</div>
+          <Switch checked={checked} onChange={() => setMethod(!checked)} />
+        </div>
+        <div className="placeholder-box" />
+      </>
+    );
+  }
   function handleReset() {
     setIsRotate(true);
     onResetSettingOptions();
@@ -40,24 +53,16 @@ function SettingPopover({ setPopoverOpen }) {
 
   return (
     <div className={styles.settingPopover} style={{ marginTop: "4px" }}>
+      {/* 菜单深色模式开关 */}
+      {settingItemJSX("菜单深色模式", menuDark, setMenuDark)}
       {/* 菜单手风琴模式开关 */}
-      <div className={styles.settingItem}>
-        <div className={styles.settingItemLabel}>菜单手风琴：</div>
-        <Switch
-          checked={menuAccordionOpen}
-          onChange={() => setMenuAccordionOpen(!menuAccordionOpen)}
-        />
-      </div>
-      <div className="placeholder-box" />
+      {settingItemJSX(
+        "菜单手风琴模式",
+        menuAccordionOpen,
+        setMenuAccordionOpen,
+      )}
       {/* 页签开关 */}
-      <div className={styles.settingItem}>
-        <div className={styles.settingItemLabel}>页签：</div>
-        <Switch
-          checked={tabsBarShow}
-          onChange={() => setTabsBarShow(!tabsBarShow)}
-        />
-      </div>
-      <div className="placeholder-box" />
+      {settingItemJSX("页签", tabsBarShow, setTabsBarShow)}
       {/* 禅模式开关 */}
       <div className={styles.settingItem}>
         <div className={styles.settingItemLabel}>禅模式：</div>

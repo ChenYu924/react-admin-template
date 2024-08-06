@@ -6,17 +6,17 @@ import usePrimaryLayoutContext from "@/hooks/usePrimaryLayoutContext";
 
 function TabsBar() {
   const { setOpenedKeys } = usePrimaryLayoutContext();
-  const tabData = useSelector((state) => state.tab);
+  const stateTab = useSelector((state) => state.tab);
   const dispatch = useDispatch();
   const [activeKey, setActiveKey] = useState();
   const [items, setItems] = useState();
 
   useEffect(() => {
-    if (tabData.tabList.length) {
-      setActiveKey(tabData.activeKey);
-      setItems(tabData.tabList);
+    if (stateTab.tabList.length) {
+      setActiveKey(stateTab.activeKey);
+      setItems(stateTab.tabList);
     }
-  }, [tabData]);
+  }, [stateTab]);
 
   function handleModalOk() {
     dispatch({ type: "tab-slice/setRemoveAll" });
@@ -58,7 +58,7 @@ function TabsBar() {
         />
       </div>
       <div className="right">
-        {tabData.tabList.length > 1 && (
+        {stateTab.tabList.length > 1 && (
           <ClearOutlined className="clear" onClick={handleClearIcon} />
         )}
       </div>

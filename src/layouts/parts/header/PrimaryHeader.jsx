@@ -12,6 +12,7 @@ import {
 } from "@ant-design/icons";
 import "animate.css";
 import Cookies from "js-cookie";
+import { personalTab } from "@/utils/tools";
 import usePrimaryLayoutContext from "@/hooks/usePrimaryLayoutContext";
 import HeaderBreadcrumb from "@/layouts/parts/header/HeaderBreadcrumb";
 import SettingPopover from "@/components/settingPopover/SettingPopover";
@@ -38,27 +39,26 @@ function PrimaryHeader() {
   const [currentBreadcrumb, setCurrentBreadcrumb] = useState([]);
 
   useEffect(() => {
-    stateTab.tabList.forEach((item) => {
-      if (item.key === stateTab.activeKey) {
-        setCurrentBreadcrumb(item.path);
-      }
-    });
+    if (stateTab.tabList.length) {
+      stateTab.tabList.forEach((item) => {
+        if (item.key === stateTab.activeKey) {
+          setCurrentBreadcrumb(item.path);
+        }
+      });
+    }
   }, [stateTab]);
 
-  function addTab(key, label) {
-    const tab = {
-      key,
-      label,
-      closable: true,
-      path: ["个人页", label],
-    };
-    dispatch({ type: "tab-slice/setTab", payload: tab });
-  }
   function handleBell() {
-    addTab("mine-message", "消息中心");
+    dispatch({
+      type: "tab-slice/setTab",
+      payload: personalTab("mine-message", "消息中心"),
+    });
   }
   function handleNavProfile() {
-    addTab("mine-center", "个人中心");
+    dispatch({
+      type: "tab-slice/setTab",
+      payload: personalTab("mine-center", "个人中心"),
+    });
   }
   function handleNavLogin() {
     Cookies.remove("token");
