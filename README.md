@@ -1,6 +1,6 @@
 
 # 总体效果图
-![LTDQG U9~ZT~O@WHHS5UQ28](https://github.com/ChenYu924/react-admin-template/assets/55083844/9abca816-ee90-4735-ab66-8044e3b2b18d)
+![image](https://github.com/user-attachments/assets/2e75b4fb-ce9e-483a-a4dd-05f38f8b7f92)
 ![image](https://github.com/ChenYu924/react-admin-template/assets/55083844/33de2120-ba1d-49da-a42e-845927f062e8)
 
 # 使用到的技术栈：
@@ -15,6 +15,8 @@ React、react-router-dom、基于rtk的redux和Ant Design UI框架。
 ![1719992542412](https://github.com/ChenYu924/react-admin-template/assets/55083844/9de0fe52-b2d4-449f-92ab-dee0b53c268a)
 ## 3.头部-点击齿轮按钮-弹出设置气泡框
 点击恢复默认按钮可恢复至默认设置
+### 菜单深色模式
+![image](https://github.com/user-attachments/assets/f7d6e42d-a749-4af3-93a2-67f164ce079c)
 ### 菜单手风琴模式的开关
 ![1719992991755](https://github.com/ChenYu924/react-admin-template/assets/55083844/fbf60a3d-d0bd-48a6-b4bc-f220b0a4717a)
 ### 页签展示与否
