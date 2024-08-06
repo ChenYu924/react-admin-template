@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Menu } from "antd";
+import classNames from "classnames";
 import menuIcon from "@/config/menuIcon";
 import usePrimaryLayoutContext from "@/hooks/usePrimaryLayoutContext";
 import {
@@ -11,7 +12,7 @@ import {
 } from "@/utils/menuCalc";
 
 function SiderMenu() {
-  const { collapsed, openedKeys, menuAccordionOpen, setOpenedKeys } =
+  const { collapsed, openedKeys, menuDark, menuAccordionOpen, setOpenedKeys } =
     usePrimaryLayoutContext();
   // 仓库中的侧边栏菜单项(登录 -> 存入用户数据到user切片 - 从user切片获取菜单项数据)
   const stateMenuTree = useSelector((state) => state.user.menuTree);
@@ -150,14 +151,18 @@ function SiderMenu() {
 
   return (
     <div className="menu-wrapper" ref={menuWrapperRef}>
-      <div className="logo-wrapper">
+      <div
+        className={classNames("logo-wrapper", {
+          "logo-wrapper-dark": menuDark,
+        })}
+      >
         <div className="logo" onClick={handleLogoClick} />
       </div>
       <Menu
         items={menuItems}
         selectedKeys={[selectedMenuItem]}
         mode="inline"
-        theme="dark"
+        theme={menuDark ? "dark" : "light"}
         onClick={handleMenuItemClick}
         openKeys={openedKeys}
         onOpenChange={subMenuChange}

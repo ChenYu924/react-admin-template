@@ -83,16 +83,22 @@ $background-color-light: #fafafa;
   .sider {
     @include sticky-fragment;
     height: 100vh;
+    z-index: 2;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.1);
 
     .menu-wrapper {
       height: 100vh;
       overflow: auto;
 
+      .ant-menu-inline {
+        border-right: none;
+      }
+
       .logo-wrapper {
         @include sticky-fragment;
         height: 64px;
         padding: $layout-box-space-sm;
-        background-color: #001529;
+        background-color: #fff;
 
         .logo {
           height: 100%;
@@ -100,6 +106,10 @@ $background-color-light: #fafafa;
           border-radius: $box-radius;
           cursor: pointer;
         }
+      }
+
+      .logo-wrapper-dark {
+        background-color: #001529;
       }
     }
   }
