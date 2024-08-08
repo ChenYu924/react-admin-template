@@ -1,0 +1,84 @@
+@use "@/global.scss" as global;
+
+.search-form {
+  border: 1px solid global.$border-color-grey;
+  padding: global.$layout-box-space-sm;
+  border-radius: global.$box-radius;
+}
+
+.sort {
+  margin: 12px 0;
+  @include global.flex-row-y-center;
+
+  .label {
+    color: global.$text-color-main;
+  }
+
+  .sort-block {
+    @include global.flex-row-y-center;
+
+    .sort-item {
+      @include global.flex-center;
+      width: 90px;
+      cursor: pointer;
+      color: global.$text-color-secondary;
+      user-select: none;
+
+      &:hover {
+        color: global.$text-color-main;
+      }
+    }
+
+    .sort-item-active {
+      color: global.$primary-color;
+
+      &:hover {
+        color: global.$primary-color;
+      }
+    }
+  }
+}
+
+.statistics {
+  width: 100%;
+
+  .box {
+    @include global.flex-center;
+    width: 240px;
+    padding: global.$layout-box-space-sm;
+    border: 1px solid #fff;
+    border-radius: global.$box-radius;
+    cursor: pointer;
+    user-select: none;
+
+    &:hover {
+      background-color: global.$background-color-light;
+    }
+
+    .text {
+      flex-grow: 1;
+      margin-left: global.$layout-box-space-sm/2;
+      font-weight: bold;
+
+      .top {
+        .num {
+          color: orange;
+        }
+      }
+
+      .bottom {
+        .percent {
+          font-weight: normal;
+          color: red;
+        }
+      }
+    }
+  }
+
+  .box-active {
+    border: 1px solid global.$border-color-grey;
+    background-color: global.$background-color-light;
+    // 阴影
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+}

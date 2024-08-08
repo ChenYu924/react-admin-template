@@ -8,7 +8,7 @@ import {
   barChartOption,
   roseChartOption,
   radarChartOption,
-} from "@/mock/mockData";
+} from "@/mock/workBench";
 import { personalTab } from "@/utils/tools";
 import styles from "./WorkBench.module.scss";
 

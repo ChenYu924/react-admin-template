@@ -13,6 +13,7 @@ import GridOffset from "@/pages/grid/GridOffset";
 import GridAlign from "@/pages/grid/GridAlign";
 import AnchorShow from "@/pages/nav/anchor/AnchorShow";
 import DropdownBasic from "@/pages/nav/dropdown/DropdownBasic";
+import FormSplice from "@/pages/form/FormSplice";
 import FormBasic from "@/pages/form/FormBasic";
 import FormCall from "@/pages/form/FormCall";
 import FormLayout from "@/pages/form/FormLayout";
@@ -73,6 +74,10 @@ const router = createBrowserRouter([
       {
         path: "/dropdown-basic",
         element: <DropdownBasic />,
+      },
+      {
+        path: "/form-splice",
+        element: <FormSplice />,
       },
       {
         path: "/form-basic",
