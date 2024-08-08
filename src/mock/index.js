@@ -1,5 +1,5 @@
 import Mock from "mockjs";
-import { token, userData } from "./mockData";
+import { token, userData } from "./user";
 
 // 登录获取token
 Mock.mock("/api/login", "post", (req) => {
