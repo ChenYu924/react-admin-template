@@ -5,15 +5,15 @@ import classNames from "classnames";
 import { statisticsData } from "@/mock/form/formSplice";
 import searchIcon1 from "@/assets/images/search/searchIcon1.png";
 
-function FormSpliceStatistics({ currentCardKey, setCurrentCardKey }) {
+function FormSpliceStatistics({ searchParams, setSearchParams }) {
   return (
     <Space className={styles.statistics} size={16} wrap>
       {/* 合计 */}
       <div
         className={classNames(styles.box, {
-          [styles["box-active"]]: currentCardKey === "",
+          [styles["box-active"]]: searchParams.cardKey === "",
         })}
-        onClick={() => setCurrentCardKey("")}
+        onClick={() => setSearchParams({ ...searchParams, cardKey: "" })}
       >
         <Avatar src={searchIcon1} size={56} />
         <div className={styles.text}>
@@ -28,9 +28,11 @@ function FormSpliceStatistics({ currentCardKey, setCurrentCardKey }) {
         <div
           key={item.key}
           className={classNames(styles.box, {
-            [styles["box-active"]]: currentCardKey === item.key,
+            [styles["box-active"]]: searchParams.cardKey === item.key,
           })}
-          onClick={() => setCurrentCardKey(item.key)}
+          onClick={() =>
+            setSearchParams({ ...searchParams, cardKey: item.key })
+          }
         >
           <Avatar src={item.pic} size={56} />
           <div className={styles.text}>

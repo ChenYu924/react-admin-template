@@ -20,35 +20,24 @@ function FormSplice() {
       label: "最终预算",
     },
   ];
-  const [sortStatus, setSortStatus] = useState({});
-  const [currentCardKey, setCurrentCardKey] = useState("");
   const [searchParams, setSearchParams] = useState({});
 
   useEffect(() => {
-    handleSubmit();
-  }, [sortStatus, currentCardKey]); // eslint-disable-line react-hooks/exhaustive-deps
+    fetchList();
+  }, [searchParams]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  function fetchList(params) {
-    console.log("fetch list with params: ", params);
+  function fetchList() {
+    console.log("fetch list with params: ", searchParams);
   }
   function handleSubmit() {
     form.validateFields().then((fieldsValue) => {
-      const values = { ...fieldsValue };
-      if (sortStatus.sortKey) {
-        values.sortField = sortStatus.sortKey;
-        values.sortType = sortStatus.sortType;
-      }
-      if (currentCardKey || currentCardKey === "") {
-        values.cardKey = currentCardKey;
-      }
+      const values = { ...searchParams, ...fieldsValue };
       setSearchParams(values);
-      fetchList(values);
     });
   }
   function handleReset() {
     form.resetFields();
-    setSortStatus({});
-    setCurrentCardKey("");
+    setSearchParams({});
   }
 
   return (
@@ -58,12 +47,12 @@ function FormSplice() {
       </Form>
       <FormSpliceSort
         sortItems={sortItems}
-        sortStatus={sortStatus}
-        setSortStatus={setSortStatus}
+        searchParams={searchParams}
+        setSearchParams={setSearchParams}
       />
       <FormSpliceStatistics
-        currentCardKey={currentCardKey}
-        setCurrentCardKey={setCurrentCardKey}
+        searchParams={searchParams}
+        setSearchParams={setSearchParams}
       />
       <div className="mt-8">
         当前的搜索条件searchParams：
