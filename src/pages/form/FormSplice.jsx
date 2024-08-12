@@ -20,7 +20,7 @@ function FormSplice() {
       label: "最终预算",
     },
   ];
-  const [searchParams, setSearchParams] = useState({});
+  const [searchParams, setSearchParams] = useState({ cardKey: "" });
 
   useEffect(() => {
     fetchList();
@@ -32,12 +32,22 @@ function FormSplice() {
   function handleSubmit() {
     form.validateFields().then((fieldsValue) => {
       const values = { ...searchParams, ...fieldsValue };
+      // 年份格式转换
+      if (values.year) {
+        values.year = values.year.format("YYYY");
+      }
+      // 日期范围格式转换
+      if (values.createTime) {
+        values.createTime = values.createTime.map((date) =>
+          date.format("YYYY-MM-DD"),
+        );
+      }
       setSearchParams(values);
     });
   }
   function handleReset() {
     form.resetFields();
-    setSearchParams({});
+    setSearchParams({ cardKey: "" });
   }
 
   return (

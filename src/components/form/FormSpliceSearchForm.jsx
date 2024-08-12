@@ -1,4 +1,4 @@
-import { Row, Col, Form, Input, Select, Space, Button } from "antd";
+import { Row, Col, Form, Input, Select, Space, Button, DatePicker } from "antd";
 import {
   SearchOutlined,
   ReloadOutlined,
@@ -8,9 +8,18 @@ import {
 import { useToggle } from "ahooks";
 import styles from "./FormSplice.module.scss";
 import { unitOptions, organizationOptions } from "@/mock/form/formSplice";
+import InputPriceRange from "@/components/form/InputPriceRange";
 
 function FormSpliceSearchForm({ onSubmit, onReset }) {
+  const { RangePicker } = DatePicker;
   const [isExpand, { toggle }] = useToggle(false);
+
+  function validateToAmount(rule, value, callback) {
+    if (value && value[0] && value[1] && Number(value[0]) > Number(value[1])) {
+      callback("请输入正确的金额范围");
+    }
+    callback();
+  }
 
   return (
     <div className={styles["search-form"]}>
@@ -40,12 +49,24 @@ function FormSpliceSearchForm({ onSubmit, onReset }) {
       {isExpand && (
         <Row>
           <Col span={8}>
-            <Form.Item name="projectName" label="项目名称">
-              <Input placeholder="模糊查询" />
+            <Form.Item
+              name="amount"
+              label="金额"
+              rules={[{ validator: validateToAmount }]}
+            >
+              <InputPriceRange />
             </Form.Item>
           </Col>
-          <Col span={8}></Col>
-          <Col span={8}></Col>
+          <Col span={8}>
+            <Form.Item name="year" label="年份">
+              <DatePicker style={{ width: "100%" }} picker="year" />
+            </Form.Item>
+          </Col>
+          <Col span={8}>
+            <Form.Item name="createTime" label="创建日期">
+              <RangePicker style={{ width: "100%" }} />
+            </Form.Item>
+          </Col>
         </Row>
       )}
       {/* 功能按钮 */}
