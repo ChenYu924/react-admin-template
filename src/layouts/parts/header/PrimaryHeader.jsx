@@ -12,6 +12,7 @@ import {
 } from "@ant-design/icons";
 import "animate.css";
 import Cookies from "js-cookie";
+import { getKeysListByKey } from "@/utils/menuCalc";
 import { personalTab } from "@/utils/tools";
 import usePrimaryLayoutContext from "@/hooks/usePrimaryLayoutContext";
 import HeaderBreadcrumb from "@/layouts/parts/header/HeaderBreadcrumb";
@@ -30,7 +31,8 @@ function PrimaryHeader() {
       danger: true,
     },
   ];
-  const { collapsed, setCollapsed } = usePrimaryLayoutContext();
+  const { collapsed, setCollapsed, setOpenedKeys } = usePrimaryLayoutContext();
+  const stateMenuTree = useSelector((state) => state.user.menuTree);
   const stateUserInfo = useSelector((state) => state.user.info);
   const stateTab = useSelector((state) => state.tab);
   const dispatch = useDispatch();
@@ -48,6 +50,14 @@ function PrimaryHeader() {
     }
   }, [stateTab]);
 
+  function handleCollapsed() {
+    setCollapsed(!collapsed);
+    if (collapsed) {
+      setTimeout(() => {
+        setOpenedKeys(getKeysListByKey(stateMenuTree, stateTab.activeKey));
+      }, 300);
+    }
+  }
   function handleBell() {
     dispatch({
       type: "tab-slice/setTab",
@@ -75,7 +85,7 @@ function PrimaryHeader() {
           className="collapsed-button"
           type="text"
           icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-          onClick={() => setCollapsed(!collapsed)}
+          onClick={handleCollapsed}
         />
         {/* 展示用面包屑 */}
         <HeaderBreadcrumb currentBreadcrumb={currentBreadcrumb} />
