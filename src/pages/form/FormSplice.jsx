@@ -6,6 +6,24 @@ import FormSpliceStatistics from "@/components/form/FormSpliceStatistics";
 
 function FormSplice() {
   const [form] = Form.useForm();
+  const sourceOptions = [
+    {
+      value: "1",
+      label: "来源1",
+    },
+    {
+      value: "2",
+      label: "来源2",
+    },
+    {
+      value: "3",
+      label: "来源3",
+    },
+    {
+      value: "4",
+      label: "来源4",
+    },
+  ];
   const sortItems = [
     {
       key: "createTime",
@@ -53,7 +71,11 @@ function FormSplice() {
   return (
     <>
       <Form form={form} labelCol={{ span: 8 }} wrapperCol={{ span: 16 }}>
-        <FormSpliceSearchForm onSubmit={handleSubmit} onReset={handleReset} />
+        <FormSpliceSearchForm
+          sourceOptions={sourceOptions}
+          onSubmit={handleSubmit}
+          onReset={handleReset}
+        />
       </Form>
       <FormSpliceSort
         sortItems={sortItems}

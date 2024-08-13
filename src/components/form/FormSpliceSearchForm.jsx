@@ -1,4 +1,14 @@
-import { Row, Col, Form, Input, Select, Space, Button, DatePicker } from "antd";
+import {
+  Row,
+  Col,
+  Form,
+  Input,
+  Select,
+  Space,
+  Button,
+  DatePicker,
+  Radio,
+} from "antd";
 import {
   SearchOutlined,
   ReloadOutlined,
@@ -10,7 +20,7 @@ import styles from "./FormSplice.module.scss";
 import { unitOptions, organizationOptions } from "@/mock/form/formSplice";
 import InputPriceRange from "@/components/form/InputPriceRange";
 
-function FormSpliceSearchForm({ onSubmit, onReset }) {
+function FormSpliceSearchForm({ sourceOptions, onSubmit, onReset }) {
   const { RangePicker } = DatePicker;
   const [isExpand, { toggle }] = useToggle(false);
 
@@ -32,7 +42,13 @@ function FormSpliceSearchForm({ onSubmit, onReset }) {
         </Col>
         <Col span={8}>
           <Form.Item name="unitId" label="单位">
-            <Select options={unitOptions} placeholder="请选择单位" allowClear />
+            <Select
+              options={unitOptions}
+              placeholder="请选择单位"
+              allowClear
+              showSearch
+              optionFilterProp="label"
+            />
           </Form.Item>
         </Col>
         <Col span={8}>
@@ -41,33 +57,44 @@ function FormSpliceSearchForm({ onSubmit, onReset }) {
               options={organizationOptions}
               placeholder="请选择机构"
               allowClear
+              showSearch
+              optionFilterProp="label"
             />
           </Form.Item>
         </Col>
       </Row>
       {/* 拓展搜索 */}
       {isExpand && (
-        <Row>
-          <Col span={8}>
-            <Form.Item
-              name="amount"
-              label="金额"
-              rules={[{ validator: validateToAmount }]}
-            >
-              <InputPriceRange />
-            </Form.Item>
-          </Col>
-          <Col span={8}>
-            <Form.Item name="year" label="年份">
-              <DatePicker style={{ width: "100%" }} picker="year" />
-            </Form.Item>
-          </Col>
-          <Col span={8}>
-            <Form.Item name="createTime" label="创建日期">
-              <RangePicker style={{ width: "100%" }} />
-            </Form.Item>
-          </Col>
-        </Row>
+        <>
+          <Row>
+            <Col span={8}>
+              <Form.Item
+                name="amount"
+                label="金额"
+                rules={[{ validator: validateToAmount }]}
+              >
+                <InputPriceRange />
+              </Form.Item>
+            </Col>
+            <Col span={8}>
+              <Form.Item name="year" label="年份">
+                <DatePicker style={{ width: "100%" }} picker="year" />
+              </Form.Item>
+            </Col>
+            <Col span={8}>
+              <Form.Item name="createTime" label="创建日期">
+                <RangePicker style={{ width: "100%" }} />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row>
+            <Col span={8}>
+              <Form.Item name="source" label="数据来源">
+                <Radio.Group options={sourceOptions} />
+              </Form.Item>
+            </Col>
+          </Row>
+        </>
       )}
       {/* 功能按钮 */}
       <Row>

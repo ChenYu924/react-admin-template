@@ -3,8 +3,8 @@ import Decimal from "decimal.js";
 
 function InputPriceRange({ value = [], onChange }) {
   let [valueMin, valueMax] = value;
-  valueMin = valueMin ? new Decimal(valueMin).div(10000).toNumber() : valueMin;
-  valueMax = valueMax ? new Decimal(valueMax).div(10000).toNumber() : valueMax;
+  valueMin = valueMin ? calcWithDecimal(valueMin, "div") : valueMin;
+  valueMax = valueMax ? calcWithDecimal(valueMax, "div") : valueMax;
 
   function tenThousandUnitsJSX() {
     return (
@@ -13,12 +13,15 @@ function InputPriceRange({ value = [], onChange }) {
       </span>
     );
   }
+  function calcWithDecimal(value, method = "mul") {
+    return new Decimal(value)[method](10000).toNumber();
+  }
   function handleMinChange(val) {
-    let minVal = val ? new Decimal(val).mul(10000).toNumber() : val;
+    let minVal = val ? calcWithDecimal(val) : val;
     onChange([minVal, value[1] || null]);
   }
   function handleMaxChange(val) {
-    let maxVal = val ? new Decimal(val).mul(10000).toNumber() : val;
+    let maxVal = val ? calcWithDecimal(val) : val;
     onChange([value[0] || null, maxVal]);
   }
 

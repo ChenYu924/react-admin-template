@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Menu } from "antd";
 import classNames from "classnames";
@@ -16,9 +16,11 @@ function SiderMenu() {
     usePrimaryLayoutContext();
   // 仓库中的侧边栏菜单项(登录 -> 存入用户数据到user切片 - 从user切片获取菜单项数据)
   const stateMenuTree = useSelector((state) => state.user.menuTree);
+  const stateTabList = useSelector((state) => state.tab.tabList);
   const stateActiveKey = useSelector((state) => state.tab.activeKey);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const menuWrapperRef = useRef(null);
   const [menuItems, setMenuItems] = useState([]);
   // 所有菜单项的层级
@@ -31,20 +33,22 @@ function SiderMenu() {
     }
   }, [stateMenuTree]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {
-    if (menuItems.length && !collapsed) {
-      if (menuAccordionOpen) {
-        setOpenedKeys(getKeysListByKey(menuItems, stateActiveKey));
-      } else {
-        const allPath = [
-          ...openedKeys,
-          ...getKeysListByKey(menuItems, stateActiveKey),
-        ];
-        // 清除allPath数组中的重复项
-        const newOpenedKeys = Array.from(new Set(allPath));
-        setOpenedKeys(newOpenedKeys);
+    if (stateActiveKey) {
+      if (menuItems.length && !collapsed) {
+        if (menuAccordionOpen) {
+          setOpenedKeys(getKeysListByKey(menuItems, stateActiveKey));
+        } else {
+          const allPath = [
+            ...openedKeys,
+            ...getKeysListByKey(menuItems, stateActiveKey),
+          ];
+          // 清除allPath数组中的重复项
+          const newOpenedKeys = Array.from(new Set(allPath));
+          setOpenedKeys(newOpenedKeys);
+        }
       }
+      menuItemChange(stateActiveKey);
     }
-    menuItemChange(stateActiveKey);
   }, [stateActiveKey]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (menuAccordionOpen) {
@@ -54,20 +58,27 @@ function SiderMenu() {
 
   // 初始化菜单
   function initMenu(stateMenuTree) {
+    console.log("location.pathname", location.pathname);
     setMenuItems(renderMenuItems(stateMenuTree));
-    // 默认选中第一个菜单项
-    menuItemChange(stateMenuTree[0].key);
-    // 向tab切片添加第一个tab
-    const tab = {
-      key: stateMenuTree[0].key,
-      label: stateMenuTree[0].label,
-      closable: false,
-      path: [stateMenuTree[0].label],
-    };
-    dispatch({
-      type: "tab-slice/setTab",
-      payload: tab,
-    });
+    if (stateActiveKey && stateTabList.length) {
+      menuItemChange(stateActiveKey);
+    } else {
+      // 默认选中第一个菜单项
+      menuItemChange(stateMenuTree[0].key);
+      if (!stateTabList.length) {
+        // 向tab切片添加第一个tab
+        const tab = {
+          key: stateMenuTree[0].key,
+          label: stateMenuTree[0].label,
+          closable: false,
+          path: [stateMenuTree[0].label],
+        };
+        dispatch({
+          type: "tab-slice/setTab",
+          payload: tab,
+        });
+      }
+    }
     // 设置菜单项层级
     setLevelKeys(getLevelKeys(stateMenuTree));
   }
