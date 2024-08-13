@@ -63,7 +63,6 @@ function PrimaryHeader() {
   function handleNavLogin() {
     Cookies.remove("token");
     dispatch({ type: "user-slice/setClear" });
-    dispatch({ type: "tab-slice/setClear" });
     navigate("/login");
   }
 

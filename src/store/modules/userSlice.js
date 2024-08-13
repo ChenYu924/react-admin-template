@@ -36,9 +36,14 @@ const userSlice = createSlice({
       return { ...state, token: payload };
     },
     setClear() {
-      // 清空localStorage
-      localStorage.clear();
-      return { ...init };
+      localStorage.removeItem("id");
+      localStorage.removeItem("info");
+      localStorage.removeItem("userType");
+      localStorage.removeItem("mgrType");
+      localStorage.removeItem("menuTree");
+      localStorage.removeItem("menuTreeAll");
+      localStorage.removeItem("menuList");
+      localStorage.removeItem("menuListAll");
     },
   },
 });

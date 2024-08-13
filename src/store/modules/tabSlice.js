@@ -5,32 +5,28 @@ const tabSlice = createSlice({
   name: "tab-slice",
   initialState: {
     // 页签数组
-    tabList: [],
+    tabList: JSON.parse(localStorage.getItem("tabList")) || [],
     // 当前激活的页签
-    activeKey: "",
+    activeKey: localStorage.getItem("activeKey") || "",
   },
   reducers: {
     setTab(state, action) {
-      if (!state.tabList.length) {
+      const exists = state.tabList.find(
+        (tab) => tab.key === action.payload.key,
+      );
+      if (!exists) {
+        localStorage.setItem("tabList", JSON.stringify([...state.tabList, action.payload]));
+        localStorage.setItem("activeKey", action.payload.key);
         return {
-          tabList: [action.payload],
+          tabList: [...state.tabList, action.payload],
           activeKey: action.payload.key,
         };
       } else {
-        const exists = state.tabList.find(
-          (tab) => tab.key === action.payload.key,
-        );
-        if (!exists) {
-          return {
-            tabList: [...state.tabList, action.payload],
-            activeKey: action.payload.key,
-          };
-        } else {
-          return {
-            ...state,
-            activeKey: action.payload.key,
-          };
-        }
+        localStorage.setItem("activeKey", action.payload.key);
+        return {
+          ...state,
+          activeKey: action.payload.key,
+        };
       }
     },
     setRemoveTab(state, action) {
@@ -43,11 +39,14 @@ const tabSlice = createSlice({
         );
         const index = state.tabList.indexOf(targetTab);
         const newActiveKey = state.tabList[index - 1].key;
+        localStorage.setItem("tabList", JSON.stringify(calcTabList));
+        localStorage.setItem("activeKey", newActiveKey);
         return {
           tabList: calcTabList,
           activeKey: newActiveKey,
         };
       } else {
+        localStorage.setItem("tabList", JSON.stringify(calcTabList));
         return {
           tabList: calcTabList,
           activeKey: state.activeKey,
@@ -56,6 +55,8 @@ const tabSlice = createSlice({
     },
     setRemoveAll(state) {
       if (state.tabList.length && !state.tabList[0].closable) {
+        localStorage.setItem("tabList", JSON.stringify([state.tabList[0]]));
+        localStorage.setItem("activeKey", state.tabList[0].key);
         return {
           tabList: [state.tabList[0]],
           activeKey: state.tabList[0].key,
@@ -63,15 +64,10 @@ const tabSlice = createSlice({
       }
     },
     setActiveKey(state, action) {
+      localStorage.setItem("activeKey", action.payload);
       return {
         ...state,
         activeKey: action.payload,
-      };
-    },
-    setClear() {
-      return {
-        tabList: [],
-        activeKey: "",
       };
     },
   },

@@ -11,6 +11,7 @@ import {
 } from "@/mock/workBench";
 import { personalTab } from "@/utils/tools";
 import styles from "./WorkBench.module.scss";
+import MessageList from "@/components/workBench/MessageList";
 
 function WorkBench() {
   const dispatch = useDispatch();
@@ -91,6 +92,7 @@ function WorkBench() {
       <div className={styles.footer}>
         <div ref={roseChartRef} className={styles["rose-chart"]} />
         <div ref={radarChartRef} className={styles["radar-chart"]} />
+        <MessageList />
       </div>
     </div>
   );

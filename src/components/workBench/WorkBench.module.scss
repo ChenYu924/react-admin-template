@@ -1,0 +1,9 @@
+@use "../../global.scss" as global;
+
+.message-list {
+  @include global.flex-center;
+  width: 40%;
+  background-color: rgb(248, 251, 255);
+  border-radius: global.$box-radius;
+  font-weight: bold;
+}
