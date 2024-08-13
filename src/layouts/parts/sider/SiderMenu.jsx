@@ -9,6 +9,7 @@ import {
   getLevelKeys,
   getKeysListByKey,
   getBreadcrumbLabelList,
+  findLabelByKey,
 } from "@/utils/menuCalc";
 
 function SiderMenu() {
@@ -58,8 +59,9 @@ function SiderMenu() {
 
   // 初始化菜单
   function initMenu(stateMenuTree) {
-    console.log("location.pathname", location.pathname);
     setMenuItems(renderMenuItems(stateMenuTree));
+    // 设置菜单项层级
+    setLevelKeys(getLevelKeys(stateMenuTree));
     if (stateActiveKey && stateTabList.length) {
       menuItemChange(stateActiveKey);
     } else {
@@ -79,8 +81,29 @@ function SiderMenu() {
         });
       }
     }
-    // 设置菜单项层级
-    setLevelKeys(getLevelKeys(stateMenuTree));
+    // 浏览器地址栏输入路由地址的情况
+    const urlKey = location.pathname.slice(1);
+    if (urlKey) {
+      // 查找stateTabList中是否有当前url的key
+      const exists = stateTabList.find((tab) => tab.key === urlKey);
+      if (exists) {
+        setOpenedKeys(getKeysListByKey(menuItems, urlKey));
+        if (urlKey === stateActiveKey) return;
+        dispatch({ type: "tab-slice/setActiveKey", payload: urlKey });
+      } else {
+        setOpenedKeys(getKeysListByKey(menuItems, urlKey));
+        const tab = {
+          key: urlKey,
+          label: findLabelByKey(stateMenuTree, urlKey),
+          closable: true,
+          path: getBreadcrumbLabelList(
+            stateMenuTree,
+            getKeysListByKey(stateMenuTree, urlKey),
+          ),
+        };
+        dispatch({ type: "tab-slice/setTab", payload: tab });
+      }
+    }
   }
   function renderMenuItems(result) {
     const list = [];

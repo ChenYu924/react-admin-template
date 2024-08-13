@@ -19,10 +19,6 @@ function FormSplice() {
       value: "3",
       label: "来源3",
     },
-    {
-      value: "4",
-      label: "来源4",
-    },
   ];
   const sortItems = [
     {
@@ -40,13 +36,6 @@ function FormSplice() {
   ];
   const [searchParams, setSearchParams] = useState({ cardKey: "" });
 
-  useEffect(() => {
-    fetchList();
-  }, [searchParams]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  function fetchList() {
-    console.log("fetch list with params: ", searchParams);
-  }
   function handleSubmit() {
     form.validateFields().then((fieldsValue) => {
       const values = { ...searchParams, ...fieldsValue };

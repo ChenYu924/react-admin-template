@@ -221,6 +221,7 @@ $text-color-secondary: rgba(0, 0, 0, 0.65);
       padding: 0 $layout-box-space-sm;
       margin-left: -1px;
       margin-top: $layout-box-space-sm;
+      height: 36px;
 
       .ant-tabs-tab {
         border-radius: $box-radius $box-radius 0 0 !important;
