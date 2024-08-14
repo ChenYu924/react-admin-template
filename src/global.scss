@@ -36,6 +36,7 @@ $background-color-light: #fafafa;
 // 文本色
 $text-color-main: rgba(0, 0, 0, 0.88);
 $text-color-secondary: rgba(0, 0, 0, 0.65);
+$text-color-thirdly: rgba(0, 0, 0, 0.45);
 
 @mixin sticky-fragment {
   position: sticky;
@@ -54,6 +55,12 @@ $text-color-secondary: rgba(0, 0, 0, 0.65);
 @mixin flex-row-y-center {
   display: flex;
   align-items: center;
+}
+// 超出省略号
+@mixin text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 * {

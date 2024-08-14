@@ -9,6 +9,7 @@ import {
   LayoutOutlined,
   UserOutlined,
   PicLeftOutlined,
+  StepForwardOutlined,
 } from "@ant-design/icons";
 
 const menuIcon = {
@@ -22,6 +23,7 @@ const menuIcon = {
   closed: CloseOutlined,
   user: UserOutlined,
   template: PicLeftOutlined,
+  stepForward: StepForwardOutlined,
 };
 
 export default menuIcon;

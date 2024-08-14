@@ -10,8 +10,8 @@ function Page403() {
       title="403"
       subTitle="对不起，您没有访问该页面的权限。"
       extra={
-        <Button type="primary" onClick={() => navigate("/")}>
-          返回首页
+        <Button type="primary" onClick={() => navigate(-1)}>
+          返回
         </Button>
       }
     />
