@@ -1,20 +1,26 @@
 
 # 总体效果图
-![image](https://github.com/user-attachments/assets/2e75b4fb-ce9e-483a-a4dd-05f38f8b7f92)
+![image](https://github.com/user-attachments/assets/73cffde2-def9-4408-acc2-f6d8cd5dbdab)
 ![image](https://github.com/ChenYu924/react-admin-template/assets/55083844/33de2120-ba1d-49da-a42e-845927f062e8)
 
 # 使用到的技术栈：
-React、react-router-dom、基于rtk的redux和Ant Design UI框架。
+主框架：React、react-router-dom、基于rtk的redux和Ant Design UI框架。
+<br>
+样式表：scss、tailwindcss
+<br>
+类库：ahooks、animate.css、decimaljs、echarts、js-cookie...
+<br>
+支持：TypeScript
 
 # 具体功能效果图
 ## 1.可伸缩的菜单栏
-点击logo可回到首页并将菜单栏滚动条置顶
-## 2.页签
+注：点击logo可回到首页并将菜单栏滚动条置顶
+## 2.页签（存入localStorage，刷新页面和重新登陆页面都不会丢失）
 点击Menu项可新增页签，除首页外的页签都可以被关闭；页签条右侧有一键清除页签的icon。
 ![1719992431051](https://github.com/ChenYu924/react-admin-template/assets/55083844/b4b54985-48f2-46dd-adf8-bfd3b72566ca)
 ![1719992542412](https://github.com/ChenYu924/react-admin-template/assets/55083844/9de0fe52-b2d4-449f-92ab-dee0b53c268a)
-## 3.头部-点击齿轮按钮-弹出设置气泡框
-点击恢复默认按钮可恢复至默认设置
+## 3.设置（header中齿轮按钮）
+更改一些系统设置；注：点击恢复默认按钮可恢复至默认设置。
 ### 菜单深色模式
 ![image](https://github.com/user-attachments/assets/f7d6e42d-a749-4af3-93a2-67f164ce079c)
 ### 菜单手风琴模式的开关
