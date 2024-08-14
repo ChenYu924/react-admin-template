@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Input, Dropdown } from "antd";
-import { FileSearchOutlined } from "@ant-design/icons";
+import { SearchOutlined } from "@ant-design/icons";
 import classNames from "classnames";
 import { findPathsByKeyword, findLabelByKey } from "@/utils/menuCalc";
 
@@ -46,7 +46,7 @@ function RouteSearch() {
 
   return (
     <div className="search-wrapper">
-      <FileSearchOutlined className="header-icon" onClick={handleSearchClick} />
+      <SearchOutlined className="header-icon" onClick={handleSearchClick} />
       <Dropdown
         open={dropDownOpen}
         arrow

@@ -1,0 +1,78 @@
+@use "../../global.scss" as global;
+
+.carousel-horizontal {
+  width: 100%;
+  height: 100%;
+
+  :global {
+    .ant-carousel .slick-dots li button {
+      background: global.$primary-color;
+    }
+
+    .ant-carousel .slick-prev,
+    .ant-carousel .slick-next {
+      color: global.$primary-color;
+    }
+  }
+
+  .box {
+    height: calc(100vh - 164px);
+    padding: global.$layout-box-space-sm;
+
+    .item {
+      height: calc((100vh - 228px) / 3);
+      border: 1px solid global.$border-color-grey;
+      border-radius: global.$box-radius;
+      position: relative;
+
+      .img {
+        position: absolute;
+        top: 0;
+        right: 10px;
+        width: 52px;
+        height: 34px;
+      }
+
+      .top {
+        height: 78%;
+        padding: 7px global.$layout-box-space-sm;
+        display: flex;
+
+        .icon {
+          width: 10%;
+          font-size: 40px;
+          color: global.$primary-color;
+        }
+
+        .text {
+          margin-left: 15px;
+          padding: 12px 4px 0 0;
+          width: 90%;
+          display: flex;
+          flex-direction: column;
+
+          .title {
+            height: 26%;
+            min-height: 38px;
+            font-size: 24px;
+            font-weight: bold;
+            color: global.$text-color-main;
+            @include global.text-ellipsis;
+          }
+
+          .description {
+            height: 74%;
+            margin-top: 6px;
+            color: global.$text-color-thirdly;
+            overflow-y: auto;
+          }
+        }
+      }
+
+      .bottom {
+        height: calc(22% - 1px);
+        border-top: 1px solid global.$border-color-grey;
+      }
+    }
+  }
+}

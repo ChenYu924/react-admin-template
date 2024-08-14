@@ -126,6 +126,17 @@ export const userData = {
       ],
     },
     {
+      key: "carousel",
+      label: "Carousel 走马灯",
+      menuIco: "stepForward",
+      children: [
+        {
+          key: "carousel-horizontal",
+          label: "横向走马灯",
+        },
+      ],
+    },
+    {
       key: "mine",
       label: "个人页",
       menuIco: "user",
@@ -295,7 +306,7 @@ export const userData = {
     "/grid-align",
     "/anchor-show",
     "/dropdown-basic",
-    "form-splice",
+    "/form-splice",
     "/form-basic",
     "/form-call",
     "/form-layout",
@@ -318,7 +329,7 @@ export const userData = {
     "/grid-align",
     "/anchor-show",
     "/dropdown-basic",
-    "form-splice",
+    "/form-splice",
     "/form-basic",
     "/form-call",
     "/form-layout",

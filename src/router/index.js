@@ -22,6 +22,7 @@ import FormRequiredMask from "@/pages/form/FormRequiredMask";
 import TableBasic from "@/pages/table/TableBasic";
 import TableCustomSelect from "@/pages/table/TableCustomSelect";
 import TableRowSelect from "@/pages/table/TableRowSelect";
+import CarouselHorizontal from "@/pages/carousel/CarouselHorizontal";
 import MineCenter from "@/pages/mine/MineCenter";
 import MineMessage from "@/pages/mine/MineMessage";
 
@@ -110,6 +111,10 @@ const router = createBrowserRouter([
       {
         path: "/table-row-select",
         element: <TableRowSelect />,
+      },
+      {
+        path: "/carousel-horizontal",
+        element: <CarouselHorizontal />,
       },
       {
         path: "/mine-center",
