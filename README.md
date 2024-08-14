@@ -15,6 +15,7 @@
 # 具体功能效果图
 ## 1.可伸缩的菜单栏
 注：点击logo可回到首页并将菜单栏滚动条置顶
+![image](https://github.com/user-attachments/assets/6f5c4146-6cb0-4a61-8281-c81823763188)
 ## 2.页签（存入localStorage，刷新页面和重新登陆页面都不会丢失）
 点击Menu项可新增页签，除首页外的页签都可以被关闭；页签条右侧有一键清除页签的icon。
 ![1719992431051](https://github.com/ChenYu924/react-admin-template/assets/55083844/b4b54985-48f2-46dd-adf8-bfd3b72566ca)
