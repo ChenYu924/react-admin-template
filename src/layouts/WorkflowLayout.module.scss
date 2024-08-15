@@ -34,14 +34,10 @@
       margin-right: global.$layout-box-space-sm;
       border-top-right-radius: global.$box-radius;
       border-bottom-right-radius: global.$box-radius;
-      padding: global.$layout-box-space-sm;
+      overflow: auto;
     }
 
     .content {
-      background-color: #fff;
-      border-radius: global.$box-radius;
-      padding: global.$layout-box-space-sm;
-      overflow-y: auto;
     }
   }
 }

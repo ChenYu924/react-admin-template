@@ -130,16 +130,16 @@ const router = createBrowserRouter([
         element: <Workflow />,
       },
       {
+        path: "bad-result",
+        element: <BadResult />,
+      },
+      {
         path: "mine-center",
         element: <MineCenter />,
       },
       {
         path: "mine-message",
         element: <MineMessage />,
-      },
-      {
-        path: "bad-result",
-        element: <BadResult />,
       },
     ],
   },
