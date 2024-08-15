@@ -4,7 +4,7 @@ import { Layout } from "antd";
 import styles from "./WorkflowLayout.module.scss";
 import UserArea from "@/components/userArea/UserArea";
 
-function WorkflowLayout({ children }) {
+function WorkflowLayout() {
   const { Header, Sider, Content } = Layout;
   // 仓库中的侧边栏菜单项(登录 -> 存入用户数据到user切片 - 从user切片获取菜单项数据)
   const stateMenuTree = useSelector((state) => state.user.menuTree);
