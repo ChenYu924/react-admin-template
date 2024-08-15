@@ -1,0 +1,26 @@
+@use "../../global.scss" as global;
+
+.avatar-wrapper {
+  @include global.flex-row-y-center;
+  margin-left: global.$layout-box-space-md;
+  cursor: pointer;
+
+  .user-name {
+    color: global.$text-color-main;
+  }
+
+  .arrow {
+    margin: 0 8px;
+    transition: transform global.$animation-rotate-duration;
+  }
+
+  .avatar {
+    background-color: #f56a00;
+    color: #fff;
+  }
+
+  // 鼠标移入时arrow旋转180度，移出时恢复
+  &:hover .arrow {
+    transform: rotate(180deg);
+  }
+}

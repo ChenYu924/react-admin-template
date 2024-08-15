@@ -10,6 +10,7 @@ import {
   UserOutlined,
   PicLeftOutlined,
   StepForwardOutlined,
+  FileTextOutlined,
 } from "@ant-design/icons";
 
 const menuIcon = {
@@ -24,6 +25,7 @@ const menuIcon = {
   user: UserOutlined,
   template: PicLeftOutlined,
   stepForward: StepForwardOutlined,
+  workflow: FileTextOutlined,
 };
 
 export default menuIcon;

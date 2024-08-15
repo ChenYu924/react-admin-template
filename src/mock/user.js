@@ -137,6 +137,11 @@ export const userData = {
       ],
     },
     {
+      key: "workflow",
+      label: "工作流",
+      menuIco: "workflow",
+    },
+    {
       key: "mine",
       label: "个人页",
       menuIco: "user",
@@ -152,8 +157,8 @@ export const userData = {
       ],
     },
     {
-      key: "closed",
-      label: "暂未开放",
+      key: "bad-result",
+      label: "问题界面",
       menuIco: "closed",
     },
   ],
@@ -274,6 +279,22 @@ export const userData = {
       ],
     },
     {
+      key: "carousel",
+      label: "Carousel 走马灯",
+      menuIco: "stepForward",
+      children: [
+        {
+          key: "carousel-horizontal",
+          label: "横向走马灯",
+        },
+      ],
+    },
+    {
+      key: "workflow",
+      label: "工作流",
+      menuIco: "workflow",
+    },
+    {
       key: "mine",
       label: "个人页",
       menuIco: "user",
@@ -289,8 +310,8 @@ export const userData = {
       ],
     },
     {
-      key: "closed",
-      label: "暂未开放",
+      key: "bad-result",
+      label: "问题界面",
       menuIco: "closed",
     },
     { key: "test1", label: "test1", menuIco: "closed" },
@@ -315,9 +336,11 @@ export const userData = {
     "/table-basic",
     "/table-row-select",
     "/table-custom-select",
+    "/carousel-horizontal",
+    "/workflow",
     "/mine-center",
     "/mine-message",
-    "/closed",
+    "/bad-result",
   ],
   menuListAll: [
     "/workbench",
@@ -338,9 +361,11 @@ export const userData = {
     "/table-basic",
     "/table-row-select",
     "/table-custom-select",
+    "/carousel-horizontal",
+    "/workflow",
     "/mine-center",
     "/mine-message",
-    "/closed",
+    "/bad-result",
     "/test1",
     "/test2",
   ],

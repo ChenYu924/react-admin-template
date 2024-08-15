@@ -190,30 +190,6 @@ $text-color-thirdly: rgba(0, 0, 0, 0.45);
           .setting-item {
             display: flex;
           }
-
-          .avatar-wrapper {
-            @include flex-row-y-center;
-            margin-left: $layout-box-space-md;
-            cursor: pointer;
-
-            .user-name {
-            }
-
-            .arrow {
-              margin: 0 8px;
-              transition: transform $animation-rotate-duration;
-            }
-
-            .avatar {
-              background-color: #f56a00;
-              color: #fff;
-            }
-
-            // 鼠标移入时arrow旋转180度，移出时恢复
-            &:hover .arrow {
-              transform: rotate(180deg);
-            }
-          }
         }
       }
     }

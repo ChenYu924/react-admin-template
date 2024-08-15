@@ -3,6 +3,7 @@ import { createBrowserRouter } from "react-router-dom";
 import LoginPage from "@/pages/login/LoginPage";
 // 通用布局
 import PrimaryLayout from "@/layouts/PrimaryLayout";
+import WorkflowLayout from "@/layouts/WorkflowLayout";
 // 引入通用布局的二级路由页面
 import WorkBench from "@/pages/workBench/WorkBench";
 import FloatButtonPosition from "@/pages/button/FloatButtonPosition";
@@ -23,116 +24,148 @@ import TableBasic from "@/pages/table/TableBasic";
 import TableCustomSelect from "@/pages/table/TableCustomSelect";
 import TableRowSelect from "@/pages/table/TableRowSelect";
 import CarouselHorizontal from "@/pages/carousel/CarouselHorizontal";
+import Workflow from "@/pages/workflow/Workflow";
 import MineCenter from "@/pages/mine/MineCenter";
 import MineMessage from "@/pages/mine/MineMessage";
+import BadResult from "@/pages/result/BadResult";
+// 引入工作流布局的二级路由页面
+import WfBasic from "@/pages/workflow/WfBasic";
 
 // 403
 import Page403 from "@/pages/403";
 // 404
 import Page404 from "@/pages/404";
+// 500
+import Page500 from "@/pages/500";
 
 const router = createBrowserRouter([
+  // 登录页
   {
     path: "/login",
     element: <LoginPage />,
   },
+  // 通用布局
   {
     path: "/",
     element: <PrimaryLayout />,
     children: [
       {
-        path: "/workbench",
+        path: "workbench",
         element: <WorkBench />,
       },
       {
-        path: "/float-button-position",
+        path: "float-button-position",
         element: <FloatButtonPosition />,
       },
       {
-        path: "/with-steps1",
+        path: "with-steps1",
         element: <WithSteps1 />,
       },
       {
-        path: "/grid-basic",
+        path: "grid-basic",
         element: <GridBasic />,
       },
       {
-        path: "/grid-gutter",
+        path: "grid-gutter",
         element: <GridGutter />,
       },
       {
-        path: "/grid-offset",
+        path: "grid-offset",
         element: <GridOffset />,
       },
       {
-        path: "/grid-align",
+        path: "grid-align",
         element: <GridAlign />,
       },
       {
-        path: "/anchor-show",
+        path: "anchor-show",
         element: <AnchorShow />,
       },
       {
-        path: "/dropdown-basic",
+        path: "dropdown-basic",
         element: <DropdownBasic />,
       },
       {
-        path: "/form-splice",
+        path: "form-splice",
         element: <FormSplice />,
       },
       {
-        path: "/form-basic",
+        path: "form-basic",
         element: <FormBasic />,
       },
       {
-        path: "/form-call",
+        path: "form-call",
         element: <FormCall />,
       },
       {
-        path: "/form-layout",
+        path: "form-layout",
         element: <FormLayout />,
       },
       {
-        path: "/form-layout-mixin",
+        path: "form-layout-mixin",
         element: <FormLayoutMixin />,
       },
       {
-        path: "/form-required-mask",
+        path: "form-required-mask",
         element: <FormRequiredMask />,
       },
       {
-        path: "/table-basic",
+        path: "table-basic",
         element: <TableBasic />,
       },
       {
-        path: "/table-custom-select",
+        path: "table-custom-select",
         element: <TableCustomSelect />,
       },
       {
-        path: "/table-row-select",
+        path: "table-row-select",
         element: <TableRowSelect />,
       },
       {
-        path: "/carousel-horizontal",
+        path: "carousel-horizontal",
         element: <CarouselHorizontal />,
       },
       {
-        path: "/mine-center",
+        path: "workflow",
+        element: <Workflow />,
+      },
+      {
+        path: "mine-center",
         element: <MineCenter />,
       },
       {
-        path: "/mine-message",
+        path: "mine-message",
         element: <MineMessage />,
+      },
+      {
+        path: "bad-result",
+        element: <BadResult />,
       },
     ],
   },
+  // 工作流布局
+  {
+    path: "/wf",
+    element: <WorkflowLayout />,
+    children: [
+      {
+        path: "wf-basic",
+        element: <WfBasic />,
+      },
+    ],
+  },
+  // 403和404
   {
     path: "/403",
     element: <Page403 />,
   },
   {
-    path: "*",
+    path: "/404",
     element: <Page404 />,
+  },
+  {
+    path: "/500",
+    element: <Page500 />,
   },
 ]);
 
