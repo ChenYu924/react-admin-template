@@ -1,0 +1,23 @@
+@use "@/global.scss" as global;
+
+.header {
+  height: 57px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-left: global.$layout-box-space-sm;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  @include global.sticky-fragment;
+
+  .title {
+    font-size: 16px;
+    font-weight: bold;
+    color: global.$text-color-main;
+    letter-spacing: 0.5px;
+  }
+}
+
+.steps {
+  padding: global.$layout-box-space-md;
+}

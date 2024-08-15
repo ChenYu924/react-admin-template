@@ -142,6 +142,11 @@ export const userData = {
       menuIco: "workflow",
     },
     {
+      key: "bad-result",
+      label: "问题界面",
+      menuIco: "closed",
+    },
+    {
       key: "mine",
       label: "个人页",
       menuIco: "user",
@@ -155,11 +160,6 @@ export const userData = {
           label: "消息中心",
         },
       ],
-    },
-    {
-      key: "bad-result",
-      label: "问题界面",
-      menuIco: "closed",
     },
   ],
   menuTreeAll: [
@@ -295,6 +295,11 @@ export const userData = {
       menuIco: "workflow",
     },
     {
+      key: "bad-result",
+      label: "问题界面",
+      menuIco: "closed",
+    },
+    {
       key: "mine",
       label: "个人页",
       menuIco: "user",
@@ -308,11 +313,6 @@ export const userData = {
           label: "消息中心",
         },
       ],
-    },
-    {
-      key: "bad-result",
-      label: "问题界面",
-      menuIco: "closed",
     },
     { key: "test1", label: "test1", menuIco: "closed" },
     { key: "test2", label: "test2", menuIco: "closed" },
@@ -338,9 +338,9 @@ export const userData = {
     "/table-custom-select",
     "/carousel-horizontal",
     "/workflow",
+    "/bad-result",
     "/mine-center",
     "/mine-message",
-    "/bad-result",
   ],
   menuListAll: [
     "/workbench",
@@ -363,9 +363,9 @@ export const userData = {
     "/table-custom-select",
     "/carousel-horizontal",
     "/workflow",
+    "/bad-result",
     "/mine-center",
     "/mine-message",
-    "/bad-result",
     "/test1",
     "/test2",
   ],

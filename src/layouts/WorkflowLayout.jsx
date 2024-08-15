@@ -3,6 +3,7 @@ import { useNavigate, Outlet } from "react-router-dom";
 import { Layout } from "antd";
 import styles from "./WorkflowLayout.module.scss";
 import UserArea from "@/components/userArea/UserArea";
+import WorkflowMenu from "@/components/workflow/menu/WorkflowMenu";
 
 function WorkflowLayout() {
   const { Header, Sider, Content } = Layout;
@@ -26,7 +27,7 @@ function WorkflowLayout() {
       </Header>
       <Layout className={styles.main}>
         <Sider className={styles.sider} theme="light" width={288}>
-          Sider
+          <WorkflowMenu />
         </Sider>
         <Content className={styles.content}>
           <Outlet />
