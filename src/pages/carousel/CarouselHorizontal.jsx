@@ -19,7 +19,7 @@ function CarouselHorizontal() {
           },
         }}
       >
-        <Carousel arrows={carouselHorizontalList.length > 9 ? true : false}>
+        <Carousel arrows={carouselHorizontalList.length > 9}>
           {/* 根据列表总数计算需使用的走马灯盒子数(每页9个，计算时向上取整) */}
           {carouselHorizontalList.length &&
             Array.from({
