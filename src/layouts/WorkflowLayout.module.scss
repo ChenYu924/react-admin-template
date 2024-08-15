@@ -1,0 +1,47 @@
+@use "@/global.scss" as global;
+
+.workflow-layout {
+  min-width: 1200px;
+
+  .header {
+    height: 64px;
+    padding-left: 0;
+    padding-right: global.$layout-box-space-sm;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+
+    .logo-wrapper {
+      height: 100%;
+      width: 288px;
+      padding: global.$layout-box-space-sm;
+
+      .logo {
+        height: 100%;
+        background-color: global.$placeholder-box-color;
+        border-radius: global.$box-radius;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .main {
+    height: calc(100vh - 96px);
+    margin: global.$layout-box-space-sm global.$layout-box-space-sm
+      global.$layout-box-space-sm 0;
+
+    .sider {
+      margin-right: global.$layout-box-space-sm;
+      border-top-right-radius: global.$box-radius;
+      border-bottom-right-radius: global.$box-radius;
+      padding: global.$layout-box-space-sm;
+    }
+
+    .content {
+      background-color: #fff;
+      border-radius: global.$box-radius;
+      padding: global.$layout-box-space-sm;
+      overflow-y: auto;
+    }
+  }
+}

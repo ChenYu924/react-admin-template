@@ -125,7 +125,6 @@ function SiderMenu() {
     navigate(`/${key}`);
   }
   function handleLogoClick() {
-    menuItemChange(menuItems[0].key);
     dispatch({ type: "tab-slice/setActiveKey", payload: menuItems[0].key });
     menuWrapperRef.current.scrollTo({
       top: 0,

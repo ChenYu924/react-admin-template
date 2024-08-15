@@ -1,42 +1,26 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { Button, Avatar, Badge, Dropdown, Popover } from "antd";
+import { Button, Badge, Popover } from "antd";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
-  UpOutlined,
-  UserOutlined,
   BellOutlined,
   SettingOutlined,
 } from "@ant-design/icons";
 import "animate.css";
-import Cookies from "js-cookie";
 import { getKeysListByKey } from "@/utils/menuCalc";
 import { personalTab } from "@/utils/tools";
 import usePrimaryLayoutContext from "@/hooks/usePrimaryLayoutContext";
 import HeaderBreadcrumb from "@/layouts/parts/header/HeaderBreadcrumb";
-import SettingPopover from "@/components/settingPopover/SettingPopover";
 import RouteSearch from "@/components/routeSearch/RouteSearch";
+import SettingPopover from "@/components/settingPopover/SettingPopover";
+import UserArea from "@/components/userArea/UserArea";
 
 function PrimaryHeader() {
-  const dropdownItems = [
-    {
-      key: "profile",
-      label: <span onClick={handleNavProfile}>个人中心</span>,
-    },
-    {
-      key: "logout",
-      label: <span onClick={handleNavLogin}>退出登录</span>,
-      danger: true,
-    },
-  ];
   const { collapsed, setCollapsed, setOpenedKeys } = usePrimaryLayoutContext();
   const stateMenuTree = useSelector((state) => state.user.menuTree);
-  const stateUserInfo = useSelector((state) => state.user.info);
   const stateTab = useSelector((state) => state.tab);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [popoverOpen, setPopoverOpen] = useState(false);
   const [currentBreadcrumb, setCurrentBreadcrumb] = useState([]);
 
@@ -63,17 +47,6 @@ function PrimaryHeader() {
       type: "tab-slice/setTab",
       payload: personalTab("mine-message", "消息中心"),
     });
-  }
-  function handleNavProfile() {
-    dispatch({
-      type: "tab-slice/setTab",
-      payload: personalTab("mine-center", "个人中心"),
-    });
-  }
-  function handleNavLogin() {
-    Cookies.remove("token");
-    dispatch({ type: "user-slice/setClear" });
-    navigate("/login");
   }
 
   return (
@@ -111,13 +84,7 @@ function PrimaryHeader() {
           />
         </Popover>
         {/* 个人信息 */}
-        <Dropdown menu={{ items: dropdownItems }}>
-          <div className="avatar-wrapper">
-            <span className="user-name">{stateUserInfo.nickname}</span>
-            <UpOutlined className="arrow" />
-            <Avatar size={40} icon={<UserOutlined />} className="avatar" />
-          </div>
-        </Dropdown>
+        <UserArea />
       </div>
     </div>
   );

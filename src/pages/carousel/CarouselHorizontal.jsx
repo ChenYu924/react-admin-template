@@ -33,7 +33,7 @@ function CarouselHorizontal() {
                     .map((item) => (
                       <Col key={item.id} span={8}>
                         <div key={item.id} className={styles.item}>
-                          {/* 绝对定位旗帜 */}
+                          {/* 卡片右上角旗帜（绝对定位） */}
                           <img
                             className={styles.img}
                             src={item.type === "1" ? general : custom}
