@@ -1,8 +1,12 @@
+import { useSelector } from "react-redux";
 import { Button, Steps } from "antd";
 import { DoubleRightOutlined } from "@ant-design/icons";
 import styles from "./WorkflowMenu.module.scss";
 
 function WorkflowMenu() {
+  const stateStepsList = useSelector((state) => state.workflow.stepsList);
+  const stateCurrentStep = useSelector((state) => state.workflow.currentStep);
+
   return (
     <>
       <div className={styles.header}>
@@ -15,21 +19,8 @@ function WorkflowMenu() {
         className={styles.steps}
         direction="vertical"
         size="small"
-        current={1}
-        items={[
-          {
-            title: "个人信息",
-          },
-          {
-            title: "个人经历",
-          },
-          {
-            title: "未来展望",
-          },
-          {
-            title: "完成",
-          },
-        ]}
+        current={stateCurrentStep}
+        items={stateStepsList}
       />
     </>
   );
