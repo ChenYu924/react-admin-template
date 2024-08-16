@@ -10,6 +10,7 @@
     background-color: #fff;
     display: flex;
     justify-content: space-between;
+    @include global.sticky-fragment;
 
     .logo-wrapper {
       height: 100%;
@@ -31,13 +32,12 @@
       global.$layout-box-space-sm 0;
 
     .sider {
-      margin-right: global.$layout-box-space-sm;
       border-top-right-radius: global.$box-radius;
       border-bottom-right-radius: global.$box-radius;
-      overflow: auto;
     }
 
     .content {
+      margin-left: global.$layout-box-space-sm;
     }
   }
 }

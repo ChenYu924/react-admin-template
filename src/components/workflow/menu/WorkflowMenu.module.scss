@@ -8,7 +8,6 @@
   justify-content: space-between;
   align-items: center;
   background-color: #fff;
-  @include global.sticky-fragment;
 
   .title {
     font-size: 16px;
@@ -19,5 +18,8 @@
 }
 
 .steps {
-  padding: global.$layout-box-space-md;
+  margin: 24px;
+  width: 240px;
+  max-height: calc(100vh - 200px);
+  overflow: auto;
 }

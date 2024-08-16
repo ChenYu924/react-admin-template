@@ -19,7 +19,10 @@ function CarouselHorizontal() {
           },
         }}
       >
-        <Carousel arrows={carouselHorizontalList.length > 9}>
+        <Carousel
+          arrows={carouselHorizontalList.length > 9}
+          dots={carouselHorizontalList.length > 9}
+        >
           {/* 根据列表总数计算需使用的走马灯盒子数(每页9个，计算时向上取整) */}
           {carouselHorizontalList.length &&
             Array.from({
@@ -37,7 +40,7 @@ function CarouselHorizontal() {
                           <img
                             className={styles.img}
                             src={item.type === "1" ? general : custom}
-                            alt=""
+                            alt="类型"
                           />
                           <div className={styles.top}>
                             <div className={styles.icon}>
