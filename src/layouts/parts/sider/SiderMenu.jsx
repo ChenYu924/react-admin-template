@@ -53,12 +53,7 @@ function SiderMenu() {
   }, [stateActiveKey]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (location.pathname) {
-      const locationKey = location.pathname.slice(1);
-      if (locationKey === stateActiveKey) return;
-      dispatch({
-        type: "tab-slice/setActiveKey",
-        payload: locationKey,
-      });
+      urlKeyChange();
     }
   }, [location.pathname]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {
@@ -91,6 +86,9 @@ function SiderMenu() {
         });
       }
     }
+    urlKeyChange();
+  }
+  function urlKeyChange() {
     // 浏览器地址栏输入路由地址的情况
     const urlKey = location.pathname.slice(1);
     if (urlKey) {
