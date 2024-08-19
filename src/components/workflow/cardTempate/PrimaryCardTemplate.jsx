@@ -1,6 +1,8 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Button, Card, Space } from "antd";
+import { ArrowDownOutlined } from "@ant-design/icons";
+import classNames from "classnames";
 import styles from "@/components/workflow/cardTempate/CardTemplate.module.scss";
 
 function PrimaryCardTemplate(props) {
@@ -33,10 +35,12 @@ function PrimaryCardTemplate(props) {
       {/* 底部悬浮操作框 */}
       <div className={styles["card-footer-common"]}>
         <Space>
-          {stateCurrentStep ? (
+          {stateCurrentStep &&
+          stateCurrentStep !== stateStepsList.length - 1 ? (
             <Button onClick={handlePrevious}>上一步</Button>
           ) : null}
           <Button
+            style={{ width: "74px" }}
             type="primary"
             disabled={stateCurrentStep === stateStepsList.length - 1}
             onClick={handleNext}
@@ -47,6 +51,17 @@ function PrimaryCardTemplate(props) {
           </Button>
         </Space>
       </div>
+      {/* 引导用箭头(绝对定位) */}
+      {stateCurrentStep !== stateStepsList.length - 1 && (
+        <ArrowDownOutlined
+          className={classNames(
+            styles["arrow-down"],
+            "animate__animated",
+            "animate__infinite",
+            "animate__slideOutDown",
+          )}
+        />
+      )}
     </Card>
   );
 }

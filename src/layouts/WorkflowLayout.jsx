@@ -8,9 +8,9 @@ import WorkflowMenu from "@/components/workflow/menu/WorkflowMenu";
 
 // 上下文对象
 export const WorkflowLayoutContext = createContext(null);
+const { Header, Sider, Content } = Layout;
 
 function WorkflowLayout() {
-  const { Header, Sider, Content } = Layout;
   // 仓库中的侧边栏菜单项(登录 -> 存入用户数据到user切片 - 从user切片获取菜单项数据)
   const stateMenuTree = useSelector((state) => state.user.menuTree);
   const dispatch = useDispatch();

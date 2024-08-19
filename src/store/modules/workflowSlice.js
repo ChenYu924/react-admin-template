@@ -26,6 +26,9 @@ const workflowSlice = createSlice({
       }
       return { ...state, currentStep: state.currentStep - 1 };
     },
+    setCurrentStep(state, { payload }) {
+      return { ...state, currentStep: payload };
+    }
   },
 });
 

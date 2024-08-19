@@ -15,17 +15,12 @@ export const PrimaryLayoutContext = createContext(null);
 function PrimaryLayout() {
   const { Header, Sider, Content } = Layout;
   const dispatch = useDispatch();
-  // 侧边菜单栏是否收起
   const [collapsed, setCollapsed] = useState(false);
   // 当前展开的sub菜单项
   const [openedKeys, setOpenedKeys] = useState([]);
-  // 菜单栏深色模式
   const [menuDark, setMenuDark] = useState(false);
-  // 是否开启菜单手风琴模式
   const [menuAccordionOpen, setMenuAccordionOpen] = useState(true);
-  // 页签条是否展示
   const [tabsBarShow, setTabsBarShow] = useState(true);
-  // 是否开启禅模式
   const [zenModeOpen, setZenModeOpen] = useState(false);
 
   useEffect(() => {
