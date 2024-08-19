@@ -7,10 +7,10 @@ import styles from "@/components/workflow/cardTempate/CardTemplate.module.scss";
 
 function PrimaryCardTemplate(props) {
   const { extra = defaultCardExtraJSX(), title, children } = props;
-  const navigate = useNavigate();
   const stateStepsList = useSelector((state) => state.workflow.stepsList);
   const stateCurrentStep = useSelector((state) => state.workflow.currentStep);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   function defaultCardExtraJSX() {
     return (

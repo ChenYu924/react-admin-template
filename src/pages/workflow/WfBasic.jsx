@@ -7,9 +7,9 @@ import { wfBasicWorkflowData } from "@/mock/workflow/wfBasic";
 import PrimaryCardTemplate from "@/components/workflow/cardTempate/PrimaryCardTemplate";
 
 function WfBasic() {
+  const navigate = useNavigate();
   const stateWorkflow = useSelector((state) => state.workflow);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [cardTitle, setCardTitle] = useState("加载中...");
 
   useEffect(() => {
