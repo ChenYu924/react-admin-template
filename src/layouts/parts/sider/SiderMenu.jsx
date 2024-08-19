@@ -52,6 +52,16 @@ function SiderMenu() {
     }
   }, [stateActiveKey]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {
+    if (location.pathname) {
+      const locationKey = location.pathname.slice(1);
+      if (locationKey === stateActiveKey) return;
+      dispatch({
+        type: "tab-slice/setActiveKey",
+        payload: locationKey,
+      });
+    }
+  }, [location.pathname]); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => {
     if (menuAccordionOpen) {
       setOpenedKeys([]);
     }
